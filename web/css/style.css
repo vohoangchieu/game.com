@@ -1,0 +1,33 @@
+body{font-size:12px;font-family:Arial;color:#333;padding:31px 0px 0px 0px;margin:0px; background-color:#f4f4f4;}
+form{font-size:12px;font-family:Arial;color:#333;padding:0px;margin:0px auto 0px auto;width:1000px;overflow:hidden;}
+table{font-size: 12px;font-family: Arial;}
+ul{padding:0px;margin:0px;list-style-type:none;}ul li{padding:0px;margin:0px;list-style-type:none;}
+h1,h2,h3,h4,h5,h6{padding:0px; margin:0px;}img{border:0px;}.sao{font-family:Verdana;color:Red;}.cl{clear:both;}
+a{color:#5e5e5e;text-decoration:none;}a:hover{color:#ff0000;text-decoration:underline;}
+
+.textbox{border: 1px solid #288fb8;font-size: 11px;font-family:Arial;color: #2c478c;background-color:White;} 
+.textbox1{border: 1px solid #288fb8;font-size: 11px;font-family: Arial;color: #2c478c;background-color: White;text-transform: lowercase;}
+.textbox2{border:0px solid #fff;font-size:11px;font-family:Arial;color: #2c478c;background-color:Transparent;padding:0px;margin:0px; border:0px; border-style:none;} 
+.txt12{border: 1px solid #288fb8;font-size: 12px;font-family:Arial;color: #2c478c;background-color:White; padding:2px;} 
+
+.button{color: #fff;font-family: verdana, Arial, helvetica, sans-serif;font-size: 8pt;font-weight: bold;background-color: #6898D0;cursor: pointer;padding: 2px;border: #dadada 2px outset;} 
+.button1{color: #fff;font-family: verdana, Arial, helvetica, sans-serif;font-size: 8pt;font-weight: bold;background-color: #6898D0;cursor: pointer;padding: 2px;border: #dadada 2px outset;} 
+.btnID{font-family:Arial;padding:1px;margin:0px; font-size:11px;}
+
+.divct1{float:left;width:115px;padding:5px;}
+.divct2{float:left;width:400px; padding:5px 0px;}
+
+.tdiv{padding:5px;font-weight:bold; padding:5px;}
+.tdiv b{float:right;color:Red;}
+.tdiv img{vertical-align:middle;}
+
+/*==============================================Begin Pages======================================*/
+#lblPage{ display:block;text-align:center;padding-top:10px;height:24px; clear:both;font-weight:bold;}
+A.apage:link{color:#0062BD;text-decoration:none;border: 1px solid #cccccc;padding:0px 5px;vertical-align:middle;font-weight:bold;}
+A.apage:visited{color: #0062BD;text-decoration:none;border: 1px solid #cccccc;padding:0px 5px;vertical-align: middle;font-weight:bold;}
+A.apage:hover {color:#f60;text-decoration:none;border:1px solid red;padding:0px 5px;vertical-align:middle;font-weight:bold;}
+.cpage{color:red;text-decoration:none;border:1px solid #cccccc;padding:0px 5px;vertical-align:middle;font-weight:bold;}
+/*==============================================End Pages======================================*/
+#dgl{width:125px;top:140px;position:fixed;z-index:0;overflow:hidden;}
+#dgr{width:125px;top:140px;position:fixed;z-index:0;overflow:hidden;}
+#divAdLeft img,#divAdRight img{ width:125px;}

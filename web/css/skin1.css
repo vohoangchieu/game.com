@@ -1,0 +1,18 @@
+div.divslp{height:200px;overflow:hidden;width:998px;}
+div.divslp div.l{ width:20px; float:left; margin-left:10px;}
+div.divslp div.r{ width:20px; float:left;}
+
+.skinimg{width:923px;height:200px;float:left; overflow:hidden; padding-left:5px;}
+.skinimg .jcarousel-clip{overflow:hidden;}
+
+#slide-adv-next, #slide-adv-back{height:100px;width:30px;display:block;}
+#slide-adv-next{background:url(../image/website/right.jpg) no-repeat right center;}
+#slide-adv-back{background:url(../image/website/left.jpg) no-repeat left center;}
+
+#ul-box-adv{height:200px;overflow:hidden;}
+#ul-box-adv li{float:left; height:200px; width:210px; overflow:hidden; padding-left:10px;background:url(../image/website/gp2.gif) no-repeat 10px top; padding-right:10px; text-align:center;}
+div.divslp li img{ width:200px; height:133px;padding:5px;}
+div.divslp li strong{padding-top:5px; display:block; line-height:15px; height:15px; overflow:hidden;}
+div.divslp li div{ font-weight:bold; padding-top:5px;}
+div.divslp li span{ display:block; line-height:15px; height:30px; overflow:hidden; padding-top:5px; text-align:justify;}
+div.divslp li b{ color:Red;}

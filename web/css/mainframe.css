@@ -1,0 +1,21 @@
+#dhtmltooltipMK{z-index: 999;left: -300px;visibility: hidden;position: absolute;}
+#dhtmltooltip
+{
+    border-right: black 1px solid;padding-right: 2px;
+    border-top: black 1px solid;padding-left: 2px;z-index: 999;
+    FILTER: progid:DXImageTransform.Microsoft.Shadow(color=gray,direction=135);
+    left: -300px;visibility: hidden;padding-bottom: 2px;border-left: black 1px solid;
+    width: 120px;padding-top: 2px;border-bottom: black 1px solid;position: absolute;background-color: #ffffff;
+}
+.NewDetail_Title{padding-left: 20px;font-weight: bold;font-size: 12px;color:Navy ;}
+.NewDetail_Title A{padding-left: 20px;font-weight: bold;font-size: 12px;color: Navy;}
+.NewDetail_Title_Comment{padding-left: 10px;font-weight: bold;font-size: 12px;color: Navy;}
+.NewDetail_Title_Comment A{padding-left: 10px;font-weight: bold;font-size: 12px;color: Navy;}
+.bdtl{font-size: 11px;border: #666666 1px solid;color:#3a3a3a;font-family:Tahoma;text-align:justify; background-color:#fff;padding:4px;}
+.bdt1
+{
+    border: #666666 1px solid; background-color:#fff;   
+    width:300px; padding:4px;
+    FILTER: progid:DXImageTransform.Microsoft.Shadow(color=gray,direction=135);
+}
+.bdtl img{ width:350px;}
