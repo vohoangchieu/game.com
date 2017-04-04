@@ -5,6 +5,9 @@
  */
 package game.com;
 
+import game.com.entity.CategoryEntity;
+import java.util.List;
+
 /**
  *
  * @author chieuvh
@@ -17,9 +20,8 @@ public class AppConfig {
     public static String databaseUrl = "";
     public static String databaseUser = "";
     public static String databasePassword = "";
-    public static String homeLat = "";
-    public static String homeLng = "";
-    public static String homeZoomLevel = "";
-    public static String detailZoomLevel = "";
     public static String dateFormat = "";
+    public static int maxCategoryInTopNav = 5;
+    
+    public static List<CategoryEntity> categoryList;
 }

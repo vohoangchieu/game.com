@@ -1,0 +1,24 @@
+
+
+<li class="g n">
+    <a class="a1" href="/" title="{{TITLE}}">Trang Chủ</a>
+    <div></div>
+</li>
+
+{{#TOP_NAV_CATEGORY}}
+<li class="g n"><!--class="g s"-->
+    <a class="a1" href="/c/{{CATEGORY_URL}}" title="{{CATEGORY_NAME}}">{{CATEGORY_NAME}}</a>
+</li>
+{{/TOP_NAV_CATEGORY}}
+{{#TOP_NAV_CATEGORY_OTHER}}
+<li class="g n"><!--class="g s"-->
+    <a class="a1" href="#" title="Danh mục khác">Danh Mục Khác</a>
+    <div>
+        {{#TOP_NAV_CATEGORY}}
+        <a class="a2" href="/c/{{CATEGORY_URL}}">{{CATEGORY_NAME}}</a>
+        {{/TOP_NAV_CATEGORY}}
+    </div>
+</li>
+{{/TOP_NAV_CATEGORY_OTHER}}
+
+

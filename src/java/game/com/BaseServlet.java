@@ -5,12 +5,15 @@
  */
 package game.com;
 
+import game.com.entity.CategoryEntity;
 import hapax.Template;
+import hapax.TemplateDataDictionary;
 import hapax.TemplateException;
 import hapax.TemplateLoader;
 import hapax.TemplateResourceLoader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,9 +25,11 @@ import org.apache.log4j.Logger;
  * @author chieuvh
  */
 public class BaseServlet extends HttpServlet {
- private static final Logger logger = Logger.getLogger(BaseServlet.class);
+
+    private static final Logger logger = Logger.getLogger(BaseServlet.class);
+
     protected Template getCTemplate(String tpl) throws TemplateException {
-        TemplateLoader templateLoader = TemplateResourceLoader.create("views/");
+        TemplateLoader templateLoader = TemplateResourceLoader.create("game/com/view/");
         Template template = templateLoader.getTemplate(tpl);
         return template;
     }
@@ -42,6 +47,44 @@ public class BaseServlet extends HttpServlet {
         } finally {
             if (out != null) {
                 out.close();
+            }
+        }
+    }
+
+    protected String[] parseUriRequest(HttpServletRequest req) {
+
+        String uripath = req.getRequestURI();
+        return uripath.split("/");
+
+    }
+
+    protected void showBaseSection(TemplateDataDictionary dic) {
+        dic.showSection("top-head");
+        dic.showSection("best-sell-left");
+        dic.showSection("company");
+        dic.showSection("footer");
+        dic.showSection("header");
+        dic.showSection("left-nav");
+        dic.showSection("side-ads");
+        dic.showSection("top-banner");
+        dic.showSection("top-nav");
+        int countCategoryInTopNav = 0;
+        for (CategoryEntity categoryEntity : AppConfig.categoryList) {
+            TemplateDataDictionary nav = dic.addSection("TOP_NAV_CATEGORY");
+            nav.setVariable("CATEGORY_URL", categoryEntity.url);
+            nav.setVariable("CATEGORY_NAME", categoryEntity.name);
+            countCategoryInTopNav++;
+            if (countCategoryInTopNav == AppConfig.maxCategoryInTopNav) {
+                break;
+            }
+        }
+        if (countCategoryInTopNav < AppConfig.categoryList.size()) {
+            TemplateDataDictionary topNavOther = dic.addSection("TOP_NAV_CATEGORY_OTHER");
+            for (int i = countCategoryInTopNav; i < AppConfig.categoryList.size(); i++) {
+                TemplateDataDictionary nav = topNavOther.addSection("TOP_NAV_CATEGORY");
+                CategoryEntity categoryEntity = AppConfig.categoryList.get(i);
+                nav.setVariable("CATEGORY_URL", categoryEntity.url);
+                nav.setVariable("CATEGORY_NAME", categoryEntity.name);
             }
         }
     }

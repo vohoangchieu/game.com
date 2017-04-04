@@ -10,16 +10,9 @@ import com.google.gson.GsonBuilder;
 import hapax.Template;
 import hapax.TemplateDataDictionary;
 import hapax.TemplateDictionary;
-import hapax.TemplateException;
-import hapax.TemplateLoader;
-import hapax.TemplateResourceLoader;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
@@ -28,9 +21,9 @@ import org.apache.log4j.Logger;
  *
  * @author chieuvh
  */
-public class IndexServlet extends BaseServlet {
+public class AddGameServlet extends BaseServlet {
 
-    private static final Logger logger = Logger.getLogger(IndexServlet.class);
+    private static final Logger logger = Logger.getLogger(AddGameServlet.class);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,28 +45,9 @@ public class IndexServlet extends BaseServlet {
             String zoom = Util.getParameter(request, "zoom");
             String requestUrl = Util.getRequestUrl(request);
             TemplateDataDictionary dic = TemplateDictionary.create();
-            dic.showSection("popup");
-            dic.showSection("tuyencap");
-            dic.showSection("tramthuyvan");
-            dic.showSection("top");
-            dic.showSection("left");
-            dic.showSection("right");
-            dic.setVariable("x", x);
-            dic.setVariable("y", y);
-            dic.setVariable("zoom", zoom);
-//            dic.setVariable("staticVersion",String.valueOf(System.currentTimeMillis()));// AppConfig.staticVersion);
-            dic.setVariable("staticVersion","");// AppConfig.staticVersion);
-//            dic.setVariable("staticVersion","0");
-            dic.setVariable("webTitle", AppConfig.webTitle);
-            dic.setVariable("contextPath", AppConfig.contextPath);
-            dic.setVariable("requestUrl", requestUrl);
-            dataAccess.getConnection();
-
-//            List<TramThuyVanEntity> tramThuyVanList = dataAccess.getTramThuyVanList();
-////            List<TuyenCapEntity> tuyencapList = dataAccess.getAllTuyenCap();
-//            dic.setVariable("tramThuyVanList", gson.toJson(tramThuyVanList));
-//            dic.setVariable("tuyencapList", gson.toJson(tuyencapList));
-            Template template = getCTemplate("index");
+            dic.setVariable("TITLE", "Add game");
+            Template template = getCTemplate("add-game");
+            showBaseSection(dic);
             String data = template.renderToString(dic);
             outContent(data, response);
         } catch (Exception ex) {

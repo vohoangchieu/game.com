@@ -2,7 +2,7 @@
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <listener>
         <listener-class>
-            web.gis.AppContextListener 
+            game.com.AppContextListener 
         </listener-class>
     </listener>
     <servlet>
@@ -15,78 +15,51 @@
     </servlet-mapping>
     <!--tram -->
     <servlet>
-        <servlet-name>AjaxAddBtsServlet</servlet-name>
-        <servlet-class>web.gis.AjaxAddBtsServlet</servlet-class>
+        <servlet-name>AddGameServlet</servlet-name>
+        <servlet-class>game.com.AddGameServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AjaxAddBtsServlet</servlet-name>
-        <url-pattern>/ajax/add-bts</url-pattern>
+        <servlet-name>AddGameServlet</servlet-name>
+        <url-pattern>/add-game</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>AjaxUpdateBtsServlet</servlet-name>
-        <servlet-class>web.gis.AjaxUpdateBtsServlet</servlet-class>
+        <servlet-name>AjaxAddGameServlet</servlet-name>
+        <servlet-class>game.com.AjaxAddGameServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AjaxUpdateBtsServlet</servlet-name>
-        <url-pattern>/ajax/update-bts</url-pattern>
+        <servlet-name>AjaxAddGameServlet</servlet-name>
+        <url-pattern>/ajax/add-game</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>AjaxDeleteBtsServlet</servlet-name>
-        <servlet-class>game.com.AjaxDeleteBtsServlet</servlet-class>
+        <servlet-name>AjaxUpdateGameServlet</servlet-name>
+        <servlet-class>game.com.AjaxUpdateGameServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AjaxDeleteBtsServlet</servlet-name>
-        <url-pattern>/ajax/delete-bts</url-pattern>
+        <servlet-name>AjaxUpdateGameServlet</servlet-name>
+        <url-pattern>/ajax/update-game</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>AjaxGetSoLieuDoThuyVanServlet</servlet-name>
-        <servlet-class>game.com.AjaxGetSoLieuDoThuyVanServlet</servlet-class>
+        <servlet-name>AjaxDeleteGameServlet</servlet-name>
+        <servlet-class>game.com.AjaxDeleteGameServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AjaxGetSoLieuDoThuyVanServlet</servlet-name>
-        <url-pattern>/ajax/getsolieudothuyvan</url-pattern>
-    </servlet-mapping>
-    <!--tuyen cap -->
-    <servlet>
-        <servlet-name>AjaxAddTuyenCapServlet</servlet-name>
-        <servlet-class>game.com.AjaxAddTuyenCapServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AjaxAddTuyenCapServlet</servlet-name>
-        <url-pattern>/ajax/add-tuyencap</url-pattern>
+        <servlet-name>AjaxDeleteGameServlet</servlet-name>
+        <url-pattern>/ajax/delete-game</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>AjaxUpdateTuyenCapServlet</servlet-name>
-        <servlet-class>game.com.AjaxUpdateTuyenCapServlet</servlet-class>
+        <servlet-name>StaticResourceServlet</servlet-name>
+        <servlet-class>game.com.StaticResourceServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AjaxUpdateTuyenCapServlet</servlet-name>
-        <url-pattern>/ajax/update-tuyencap</url-pattern>
+        <servlet-name>StaticResourceServlet</servlet-name>
+        <url-pattern>/resource/*</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>AjaxDeleteTuyenCapServlet</servlet-name>
-        <servlet-class>game.com.AjaxDeleteTuyenCapServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AjaxDeleteTuyenCapServlet</servlet-name>
-        <url-pattern>/ajax/delete-tuyencap</url-pattern>
-    </servlet-mapping>
+
     <!--static -->
+   
     <servlet-mapping>
         <servlet-name>default</servlet-name>
-        <url-pattern>/css/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/js/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/img/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/fonts/*</url-pattern>
+        <url-pattern>/static/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
