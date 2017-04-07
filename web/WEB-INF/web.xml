@@ -11,7 +11,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
     <!--tram -->
     <servlet>
@@ -20,7 +20,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AddGameServlet</servlet-name>
-        <url-pattern>/add-game</url-pattern>
+        <url-pattern>/admin/add-game/*</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>AjaxAddGameServlet</servlet-name>
@@ -28,7 +28,23 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AjaxAddGameServlet</servlet-name>
-        <url-pattern>/ajax/add-game</url-pattern>
+        <url-pattern>/admin/ajax/add-game/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>HandleUploadGameThumbServlet</servlet-name>
+        <servlet-class>game.com.HandleUploadGameThumbServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HandleUploadGameThumbServlet</servlet-name>
+        <url-pattern>/admin/handle-upload-game-thumb/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>HandleUploadGameNesServlet</servlet-name>
+        <servlet-class>game.com.HandleUploadGameNesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HandleUploadGameNesServlet</servlet-name>
+        <url-pattern>/admin/handle-upload-game-nes/*</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>AjaxUpdateGameServlet</servlet-name>

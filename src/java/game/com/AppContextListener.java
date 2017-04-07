@@ -51,6 +51,7 @@ public class AppContextListener implements ServletContextListener {
             AppConfig.databasePassword = config.getProperty("databasePassword");
             AppConfig.maxCategoryInTopNav = Integer.parseInt(config.getProperty("maxCategoryInTopNav"));
             AppConfig.dateFormat = config.getProperty("dateFormat");
+            AppConfig.OPENSHIFT_DATA_DIR = config.getProperty("OPENSHIFT_DATA_DIR");
 
             String OPENSHIFT_MYSQL_DB_HOST = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
             if (OPENSHIFT_MYSQL_DB_HOST != null) {
@@ -62,6 +63,7 @@ public class AppContextListener implements ServletContextListener {
                 AppConfig.databaseUrl = databaseUrl;
                 AppConfig.databaseUser = OPENSHIFT_MYSQL_DB_USERNAME;
                 AppConfig.databasePassword = OPENSHIFT_MYSQL_DB_PASSWORD;
+                AppConfig.OPENSHIFT_DATA_DIR=System.getenv("OPENSHIFT_DATA_DIR");
             }
             DataAccess.init(AppConfig.databaseUrl, AppConfig.databaseUser, AppConfig.databasePassword);
             AppConfig.categoryList = DataAccess.getCategoryList();

@@ -21,6 +21,7 @@ public class AppConfig {
     public static String databaseUser = "";
     public static String databasePassword = "";
     public static String dateFormat = "";
+    public static String OPENSHIFT_DATA_DIR = "";
     public static int maxCategoryInTopNav = 5;
     
     public static List<CategoryEntity> categoryList;

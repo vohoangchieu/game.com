@@ -19,7 +19,6 @@ public class GameEntity extends BaseEntity{
    public int order_weight;
    public boolean is_promote;
    public boolean is_fearture;
-   public String nes_filename;
    public String link_youtube;
    public boolean is_active;
 }

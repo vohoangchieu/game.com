@@ -57,12 +57,16 @@ public class DataAccess {
         }
     }
 
-    public int insertGame(GameEntity gameEntity) throws SQLException {
+    public static int insertGame(GameEntity gameEntity) throws SQLException {
         String sql = "INSERT INTO `game`("
-                + " `url`, `name`, `name_vn`, `short_dest`, "
+                + " `url`, `name`, `name_vn`, `short_desc`, "
                 + "`long_desc`, `order_weight`, `is_promote`, "
-                + "`is_fearture`, `nes_filename`,"
-                + " `link_youtube`, `is_active`) ";
+                + "`is_fearture`, "
+                + " `link_youtube`, `is_active`) values ("
+                + " :url, :name, :name_vn, :short_desc, "
+                + ":long_desc, :order_weight, :is_promote, "
+                + ":is_fearture, "
+                + " :link_youtube, :is_active)";
         int row = 0;
         try {
             getConnection();
@@ -76,7 +80,6 @@ public class DataAccess {
             statement.setInt("order_weight", gameEntity.order_weight);
             statement.setInt("is_promote", gameEntity.is_promote ? 1 : 0);
             statement.setInt("is_fearture", gameEntity.is_fearture ? 1 : 0);
-            statement.setString("nes_filename", gameEntity.nes_filename);
             statement.setString("link_youtube", gameEntity.link_youtube);
             statement.setInt("is_active", gameEntity.is_active ? 1 : 0);
 
@@ -92,6 +95,39 @@ public class DataAccess {
             closeConnection();
         }
         return row;
+    }
+
+    public static GameEntity getGame(int id) throws SQLException {
+        String sql = "select * from `game` where id=:id";
+        GameEntity result = null;
+        try {
+            getConnection();
+            NamedParameterStatement statement = new NamedParameterStatement(conn, sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt("id", id);
+            logger.info(statement.toString());
+            ResultSet rs = statement.executeQuery();
+            if (!rs.next()) {
+                return result;
+            }
+            result = new GameEntity();
+            result.id = id;
+            result.url = rs.getString("url");
+            result.name = rs.getString("name");
+            result.name_vn = rs.getString("name_vn");
+            result.short_desc = rs.getString("short_desc");
+            result.long_desc = rs.getString("long_desc");
+            result.order_weight = rs.getInt("order_weight");
+            result.is_promote = rs.getInt("is_promote") == 1;
+            result.is_fearture = rs.getInt("is_fearture") == 1;
+            result.link_youtube = rs.getString("link_youtube");
+            result.is_active = rs.getInt("is_active") == 1;
+            return result;
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+        } finally {
+            closeConnection();
+        }
+        return result;
     }
 //
 //    public List<TramBTSEntity> getAllTramBTS() throws SQLException {

@@ -7,6 +7,8 @@ package game.com;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import game.com.entity.CategoryEntity;
+import game.com.entity.GameEntity;
 import hapax.Template;
 import hapax.TemplateDataDictionary;
 import hapax.TemplateDictionary;
@@ -34,32 +36,76 @@ public class AddGameServlet extends BaseServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DataAccess dataAccess = null;
         try {
             GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat(AppConfig.dateFormat);
-            Gson gson = gsonBuilder.create();
-            String x = Util.getParameter(request, "x");
-            String y = Util.getParameter(request, "y");
-            String zoom = Util.getParameter(request, "zoom");
-            String requestUrl = Util.getRequestUrl(request);
+            int gameID = getGameID(request);
             TemplateDataDictionary dic = TemplateDictionary.create();
-            dic.setVariable("TITLE", "Add game");
-            Template template = getCTemplate("add-game");
+            GameEntity gameEntity = null;
+            if (gameID > 0) {
+                gameEntity = DataAccess.getGame(gameID);
+            }
+            if (gameEntity == null) {
+                dic.setVariable("TITLE", "Add game");
+                dic.setVariable("id", "0");
+                dic.setVariable("url", "url0");
+                dic.setVariable("name", "name0");
+                dic.setVariable("name_vn", "namevn0");
+                dic.setVariable("short_desc", "short_dest0");
+                dic.setVariable("long_desc", "long_desc0");
+                dic.setVariable("order_weight", "0");
+                dic.setVariable("is_promote", "");
+                dic.setVariable("is_fearture", "");
+                dic.setVariable("link_youtube", "link_youtube0");
+                dic.setVariable("is_active", "");
+            } else {
+                dic.setVariable("TITLE", "Update game");
+                dic.showSection("UPDATE");
+                dic.setVariable("id", String.valueOf(gameEntity.id));
+                dic.setVariable("url", gameEntity.url);
+                dic.setVariable("name", gameEntity.name);
+                dic.setVariable("name_vn", gameEntity.name_vn);
+                dic.setVariable("short_desc", gameEntity.short_desc);
+                dic.setVariable("long_desc", gameEntity.long_desc);
+                dic.setVariable("order_weight", String.valueOf(gameEntity.order_weight));
+                dic.setVariable("is_promote_checked", gameEntity.is_promote ? "checked" : "");
+                dic.setVariable("is_fearture_checked", gameEntity.is_fearture ? "checked" : "");
+                dic.setVariable("link_youtube", gameEntity.link_youtube);
+                dic.setVariable("is_active_checked", gameEntity.is_active ? "checked" : "");
+                dic.setVariable("thumb", getThumbUrl(String.valueOf(gameID)));
+                dic.setVariable("nes", getNesFileUrl(String.valueOf(gameID)));
+            }
+
             showBaseSection(dic);
+            for (CategoryEntity categoryEntity : AppConfig.categoryList) {
+                TemplateDataDictionary nav = dic.addSection("CATEGORY");
+                nav.setVariable("CATEGORY_ID", categoryEntity.url);
+                nav.setVariable("CATEGORY_NAME", categoryEntity.name);
+
+            }
+            Template template = getCTemplate("add-game");
             String data = template.renderToString(dic);
             outContent(data, response);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         } finally {
-            if (dataAccess != null) {
-                dataAccess.closeConnection();
-            }
+
         }
 
     }
 
-   
+    private int getGameID(HttpServletRequest request) {
+        if (request.getParameter("id") == null) {
+            return 0;
+        }
+        try {
+            return Integer.parseInt(request.getParameter("id"));
+        } catch (Exception ex) {
+            return 0;
+        }
+
+    }
 
 }

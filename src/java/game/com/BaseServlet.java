@@ -89,6 +89,13 @@ public class BaseServlet extends HttpServlet {
         }
     }
 
+    protected String getThumbUrl(String gameID) {
+        return "/resource/thumb/" + gameID + ".png";
+    }
+    protected String getNesFileUrl(String gameID) {
+        return "/resource/nes/" + gameID + ".zip";
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }

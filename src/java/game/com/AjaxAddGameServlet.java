@@ -9,6 +9,7 @@ import game.com.entity.AjaxResponseEntity;
 //import game.com.entity.TuyenCapEntity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import game.com.entity.GameEntity;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -37,93 +38,104 @@ public class AjaxAddGameServlet extends BaseServlet {
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DataAccess dataAccess = null;
         AjaxResponseEntity responseObject = new AjaxResponseEntity();
         try {
-            handle(request, responseObject, dataAccess);
+            handle(request, responseObject);
             outContent(responseObject.toJsonString(), response);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         } finally {
-            if (dataAccess != null) {
-                dataAccess.closeConnection();
-            }
+
         }
 
     }
 
-    private void handle(HttpServletRequest request, AjaxResponseEntity responseObject, DataAccess dataAccess) throws Exception {
+    private void handle(HttpServletRequest request, AjaxResponseEntity responseObject) throws Exception {
         GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat(AppConfig.dateFormat);
         Gson gson = gsonBuilder.create();
-        String Ten = Util.getParameter(request, "Ten");
-        if (StringUtils.isEmpty(Ten)) {
-            responseObject.returnMessage = "Vui lòng nhập tên tuyến cáp";
+        String id = Util.getParameter(request, "id");
+        if (StringUtils.isEmpty(id)) {
+            responseObject.returnMessage = "input id";
             return;
         }
-        String X1 = Util.getParameter(request, "X1");
-        if (StringUtils.isEmpty(X1)) {
-            responseObject.returnMessage = "Vui lòng nhập tọa độ X1";
+        String url = Util.getParameter(request, "url");
+        if (StringUtils.isEmpty(url)) {
+            responseObject.returnMessage = "input url";
             return;
         }
-        String Y1 = Util.getParameter(request, "Y1");
-        if (StringUtils.isEmpty(Y1)) {
-            responseObject.returnMessage = "Vui lòng nhập tọa độ Y1";
+        String name = Util.getParameter(request, "name");
+        if (StringUtils.isEmpty(name)) {
+            responseObject.returnMessage = "input name";
             return;
         }
-        String X2 = Util.getParameter(request, "X2");
-        if (StringUtils.isEmpty(X2)) {
-            responseObject.returnMessage = "Vui lòng nhập tọa độ X2";
+        String name_vn = Util.getParameter(request, "name_vn");
+        if (StringUtils.isEmpty(name_vn)) {
+            responseObject.returnMessage = "input name_vn";
             return;
         }
-        String Y2 = Util.getParameter(request, "Y2");
-        if (StringUtils.isEmpty(X1)) {
-            responseObject.returnMessage = "Vui lòng nhập tọa độ Y2";
+        String short_desc = Util.getParameter(request, "short_desc");
+        if (StringUtils.isEmpty(short_desc)) {
+            responseObject.returnMessage = "input short_desc";
+            return;
+        }
+        String order_weight = Util.getParameter(request, "order_weight");
+        if (StringUtils.isEmpty(order_weight)) {
+            responseObject.returnMessage = "input order_weight";
+            return;
+        }
+        String link_youtube = Util.getParameter(request, "link_youtube");
+        if (StringUtils.isEmpty(link_youtube)) {
+            responseObject.returnMessage = "input link_youtube";
+            return;
+        }
+        String is_promote = Util.getParameter(request, "is_promote");
+        if (StringUtils.isEmpty(is_promote)) {
+            responseObject.returnMessage = "input is_promote";
+            return;
+        }
+        String is_fearture = Util.getParameter(request, "is_fearture");
+        if (StringUtils.isEmpty(is_fearture)) {
+            responseObject.returnMessage = "input is_fearture";
+            return;
+        }
+        String is_active = Util.getParameter(request, "is_active");
+        if (StringUtils.isEmpty(is_active)) {
+            responseObject.returnMessage = "input is_promote";
+            return;
+        }
+        String category = Util.getParameter(request, "category");
+        if (StringUtils.isEmpty(category)) {
+            responseObject.returnMessage = "input category";
+            return;
+        }
+        String long_desc = Util.getParameter(request, "long_desc");
+        if (StringUtils.isEmpty(long_desc)) {
+            responseObject.returnMessage = "input long_desc";
             return;
         }
 
-        float x1, y1, x2, y2;
-        try {
-            x1 = Float.parseFloat(X1);
-        } catch (Exception ex) {
-            responseObject.returnMessage = "Tọa độ X1 không hợp lệ";
-            return;
-        }
-        try {
-            y1 = Float.parseFloat(Y1);
-        } catch (Exception ex) {
-            responseObject.returnMessage = "Tọa độ Y1 không hợp lệ";
-            return;
-        }
-        try {
-            x2 = Float.parseFloat(X2);
-        } catch (Exception ex) {
-            responseObject.returnMessage = "Tọa độ X2 không hợp lệ";
-            return;
-        }
-        try {
-            y2 = Float.parseFloat(Y2);
-        } catch (Exception ex) {
-            responseObject.returnMessage = "Tọa độ Y2 không hợp lệ";
-            return;
-        }
+        GameEntity gameEntity = new GameEntity();
+        gameEntity.id = 0;
+        gameEntity.url = url;
+        gameEntity.name = name;
+        gameEntity.name_vn = name_vn;
+        gameEntity.short_desc = short_desc;
+        gameEntity.order_weight = Integer.parseInt(order_weight);
+        gameEntity.is_promote = Integer.parseInt(is_promote) == 1;
+        gameEntity.link_youtube = link_youtube;
+        gameEntity.is_fearture = Integer.parseInt(is_fearture) == 1;
+        gameEntity.is_active = Integer.parseInt(is_active) == 1;
+        gameEntity.long_desc = long_desc;
 
-//        TuyenCapEntity entity = new TuyenCapEntity();
-//        entity.Ten = Ten;
-//        entity.X1 = x1;
-//        entity.Y1 = y1;
-//        entity.X2 = x2;
-//        entity.Y2 = y2;
-//
-//        int Id = dataAccess.insertTuyenCap(entity);
-//        if (Id > 0) {
-//            entity.Id = Id;
-//            responseObject.data = entity.toJsonString();
-//            responseObject.returnCode = 1;
-//            responseObject.returnMessage = "Thêm tuyến cáp thành công";
-//        } else {
-//            responseObject.returnMessage = "Lỗi hệ thống, vui lòng thử lại sau";
-//        }
-
+        int idret = DataAccess.insertGame(gameEntity);
+        if (idret > 0) {
+            gameEntity.id = idret;
+            responseObject.data = String.valueOf(id);
+            responseObject.returnCode = 1;
+            responseObject.returnMessage = "success";
+        } else {
+            responseObject.returnMessage = "system error";
+        }
     }
 
 }

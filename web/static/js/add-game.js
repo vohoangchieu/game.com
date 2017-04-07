@@ -41,66 +41,62 @@ $(function () {
 //        console.log(e);
     }
 
-    $("#price").keydown(allowNumber);
-    $("#warranty").keydown(allowNumber);
-    $("#add-product").click(handleAdd);
+    $("#order_weight").keydown(allowNumber);
+    $("#add-game").click(handleAdd);
 
 })
 function handleAdd() {
-    if (validateInput() == false) {
-        return;
-    }
+
     var id = $("#id").val();
-    var category = $("#category").val();
-    var alilas = $("#alilas").val();
+    var url = $("#url").val();
     var name = $("#name").val();
-    var title = $("#title").val();
-    var price = $("#price").val();
-    var warranty = $("#warranty").val();
-    var meta_description = $("#meta-description").val();
-    var tag = $("#tag").val();
-    var show_in_home = $("#show_in_home:checked").length;
-    var show_in_slide = $("#show_in_slide:checked").length;
-    var enable = $("#enable:checked").length;
-    var description = tinyMCE.activeEditor.getContent();
+    var name_vn = $("#name_vn").val();
+    var short_desc = $("#short_desc").val();
+    var order_weight = $("#order_weight").val();
+    var link_youtube = $("#link_youtube").val();
+    var is_promote = $("#is_promote:checked").length;
+    var is_fearture = $("#is_fearture:checked").length;
+    var is_active = $("#is_active:checked").length;
+    var category = $("#category").val();
+    var long_desc = tinyMCE.activeEditor.getContent();
     $.ajax({
-        url: "/ajax/am/add-product",
+        url: "/admin/ajax/add-game",
         type: 'POST',
         dataType: 'json',
         data: {
             id: id,
-            alilas: alilas,
+            url: url,
             name: name,
-            title: title,
-            price: price,
-            warranty: warranty,
-            tag: tag,
-            show_in_home: show_in_home,
-            show_in_slide: show_in_slide,
-            enable: enable,
+            name_vn: name_vn,
+            short_desc: short_desc,
+            order_weight: order_weight,
+            link_youtube: link_youtube,
+            is_promote: is_promote,
+            is_fearture: is_fearture,
+            is_active: is_active,
             category: category,
 //            image:image,
-            description: description,
-            meta_description: meta_description,
+            long_desc: long_desc,
         },
         beforeSend: function () {
         },
-        success: function (data) {
+        success: function (resp) {
 //            hideLoading();
 //            console.log(data);
-            if (data.code == 0) {
-                var link = '<a style="color:#fff" href="' + data.msg + '" target="_blank">' + $("#name").val() + "</a>";
-                $.ambiance({
-                    type: "success",
-                    message: "Xử lý thành công. Link sản phẩm: " + link,
-                    fade: true,
-                    timeout: 2
-                });
-                setTimeout(function () {
-                    window.location = data.msg
-                }, 2000);
+            if (resp.returnCode == 1) {
+                window.location = "/admin/add-game?id=" + resp.data;
+//                var link = '<a style="color:#fff" href="/admin/add-game?id=' + data.id + '" target="_blank">' + $("#name").val() + "</a>";
+//                $.ambiance({
+//                    type: "success",
+//                    message: "Xử lý thành công. Link sản phẩm: " + link,
+//                    fade: true,
+//                    timeout: 2
+//                });
+//                setTimeout(function () {
+//                    window.location = data.msg
+//                }, 2000);
             } else {
-                showWarning(data.msg);
+                showWarning(resp.msg);
             }
         },
         error: function (e) {
@@ -108,34 +104,34 @@ function handleAdd() {
         }
     });
 }
-function validateInput() {
-    if ($("#name").val().trim() == "") {
-        $("#error").html("Nhập tên sản phẩm");
-        return false;
-    }
-    if ($("#title").val().trim() == "") {
-        $("#error").html("Nhập tiêu đề website");
-        return false;
-    }
-    if ($("#price").val().trim() == '') {
-        $("#error").html("Nhập giá sản phẩm");
-        return false;
-    }
-    if ($("#warranty").val().trim() == '') {
-        $("#error").html("Nhập thời gian bảo hành");
-        return false;
-    }
-    if ($("#category").val().trim() == '') {
-        $("#error").html("Chọn danh mục sản phẩm");
-        return false;
-    }
-    if ($("#thumb").attr("src") == "#") {
-        $("#error").html("Chọn hình ảnh sản phẩm");
-        return false;
-    }
-    $("#error").html("");
-    return true;
-}
+//function validateInput() {
+//    if ($("#name").val().trim() == "") {
+//        $("#error").html("Nhập tên sản phẩm");
+//        return false;
+//    }
+//    if ($("#title").val().trim() == "") {
+//        $("#error").html("Nhập tiêu đề website");
+//        return false;
+//    }
+//    if ($("#price").val().trim() == '') {
+//        $("#error").html("Nhập giá sản phẩm");
+//        return false;
+//    }
+//    if ($("#warranty").val().trim() == '') {
+//        $("#error").html("Nhập thời gian bảo hành");
+//        return false;
+//    }
+//    if ($("#category").val().trim() == '') {
+//        $("#error").html("Chọn danh mục sản phẩm");
+//        return false;
+//    }
+//    if ($("#thumb").attr("src") == "#") {
+//        $("#error").html("Chọn hình ảnh sản phẩm");
+//        return false;
+//    }
+//    $("#error").html("");
+//    return true;
+//}
 function allowNumber(e) {
     var key = e.charCode || e.keyCode || 0;
     // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
@@ -155,29 +151,54 @@ function allowNumber(e) {
 
 $(function () {
     'use strict';
-    var url = '/ajax/am/add-product-image-handler/';
     $('#image-file').fileupload({
         formData: {id: $("#id").val()},
         acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
         maxFileSize: 5000000, // 5 MB
-        url: url,
+        url: '/admin/handle-upload-game-thumb/',
         dataType: 'json',
         done: function (e, data) {
-            $.each(data.result.files, function (index, file) {
-                if (file.success) {
-                    //var link = '<a style="color:#fff" href="' + $("#producturl").val() + '" target="_blank">' + $("#name").val() + "</a>";
-                    $("#thumb").attr("src", file.url + "?" + (new Date()).getMilliseconds());
-                    $.ambiance({
-                        type: "success",
-                        message: "Xử lý thành công",
-                        fade: true,
-                        timeout: 3
-                    });
-                } else {
-                    showWarning("Xử lý thất bại");
-                }
+            if (data.result.returnCode == 1) {
+                $("#thumb").attr("src", data.result.data + "?" + (new Date()).getMilliseconds());
+                $.ambiance({
+                    type: "success",
+                    message: "Xử lý thành công",
+                    fade: true,
+                    timeout: 3
+                });
+            } else {
+                showWarning("Xử lý thất bại");
+            }
 
-            });
+        },
+        progressall: function (e, data) {
+            var width = 700;//$("#progress").width();
+            var progress = parseInt(data.loaded / data.total * 100, 10) / 100;
+            $('#progress .progress-bar').css(
+                    'width',
+                    progress * width + 'px'
+                    );
+        }
+    }).prop('disabled', !$.support.fileInput)
+            .parent().addClass($.support.fileInput ? undefined : 'disabled');
+    $('#nes-file').fileupload({
+        formData: {id: $("#id").val()},
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+        maxFileSize: 5000000, // 5 MB
+        url: '/admin/handle-upload-game-nes/',
+        dataType: 'json',
+        done: function (e, data) {
+            if (data.result.returnCode == 1) {
+//                $("#nes").attr("href", data.result.data + "?" + (new Date()).getMilliseconds());
+                $.ambiance({
+                    type: "success",
+                    message: "Xử lý thành công",
+                    fade: true,
+                    timeout: 3
+                });
+            } else {
+                showWarning("Xử lý thất bại");
+            }
 
         },
         progressall: function (e, data) {
