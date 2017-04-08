@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import game.com.entity.GameEntity;
 import java.io.IOException;
+import java.util.HashSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -115,7 +116,11 @@ public class AjaxAddGameServlet extends BaseServlet {
         }
 
         GameEntity gameEntity = new GameEntity();
-        gameEntity.id = 0;
+        if (StringUtils.isBlank(id)) {
+            gameEntity.id = 0;
+        } else {
+            gameEntity.id = Integer.parseInt(id);
+        }
         gameEntity.url = url;
         gameEntity.name = name;
         gameEntity.name_vn = name_vn;
@@ -126,16 +131,34 @@ public class AjaxAddGameServlet extends BaseServlet {
         gameEntity.is_fearture = Integer.parseInt(is_fearture) == 1;
         gameEntity.is_active = Integer.parseInt(is_active) == 1;
         gameEntity.long_desc = long_desc;
-
-        int idret = DataAccess.insertGame(gameEntity);
-        if (idret > 0) {
-            gameEntity.id = idret;
-            responseObject.data = String.valueOf(id);
-            responseObject.returnCode = 1;
-            responseObject.returnMessage = "success";
+        gameEntity.category_set = getCategorySet(category);
+        if (gameEntity.id <= 0) {
+            int idret = DataAccess.insertGame(gameEntity);
+            if (idret > 0) {
+                gameEntity.id = idret;
+                responseObject.data = String.valueOf(id);
+                responseObject.returnCode = 1;
+                responseObject.returnMessage = "success";
+            } else {
+                responseObject.returnMessage = "system error";
+            }
         } else {
-            responseObject.returnMessage = "system error";
+            int idret = DataAccess.updateGame(gameEntity);
+            if (idret > 0) {
+                responseObject.data = String.valueOf(idret);
+                responseObject.returnCode = 1;
+                responseObject.returnMessage = "success";
+            } else {
+                responseObject.returnMessage = "system error";
+            }
         }
     }
 
+    private HashSet<Integer> getCategorySet(String category) {
+        HashSet<Integer> result = new HashSet();
+        for (String id : category.split(",")) {
+            result.add(Integer.parseInt(id));
+        }
+        return result;
+    }
 }

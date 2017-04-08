@@ -16,6 +16,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import org.apache.log4j.Logger;
 
@@ -58,6 +59,7 @@ public class DataAccess {
     }
 
     public static int insertGame(GameEntity gameEntity) throws SQLException {
+        logger.info("insert " + gameEntity.toJsonString());
         String sql = "INSERT INTO `game`("
                 + " `url`, `name`, `name_vn`, `short_desc`, "
                 + "`long_desc`, `order_weight`, `is_promote`, "
@@ -89,6 +91,45 @@ public class DataAccess {
             if (rs.next()) {
                 row = rs.getInt(1);
             }
+            gameEntity.id = row;
+            setGameCategory(gameEntity.id, gameEntity.category_set);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+        } finally {
+            closeConnection();
+        }
+        return row;
+    }
+
+    public static int updateGame(GameEntity gameEntity) throws SQLException {
+        logger.info("update " + gameEntity.toJsonString());
+        String sql = "update `game` set "
+                + "`url`= :url, `name`=:name, `name_vn`=:name_vn,"
+                + "`short_desc`= :short_desc, "
+                + "`long_desc`=:long_desc, `order_weight`=:order_weight,"
+                + " `is_promote`=:is_promote, "
+                + " `is_fearture`=:is_fearture, "
+                + " `link_youtube`=:link_youtube, `is_active`=:is_active "
+                + " where `id`=:id";
+        int row = 0;
+        try {
+            getConnection();
+            NamedParameterStatement statement = new NamedParameterStatement(conn, sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt("id", gameEntity.id);
+            statement.setString("url", gameEntity.url);
+            statement.setString("name", gameEntity.name);
+            statement.setString("name_vn", gameEntity.name_vn);
+            statement.setString("short_desc", gameEntity.short_desc);
+            statement.setString("long_desc", gameEntity.long_desc);
+            statement.setInt("order_weight", gameEntity.order_weight);
+            statement.setInt("is_promote", gameEntity.is_promote ? 1 : 0);
+            statement.setInt("is_fearture", gameEntity.is_fearture ? 1 : 0);
+            statement.setString("link_youtube", gameEntity.link_youtube);
+            statement.setInt("is_active", gameEntity.is_active ? 1 : 0);
+
+            logger.info(statement.toString());
+            row = statement.executeUpdate();
+            setGameCategory(gameEntity.id, gameEntity.category_set);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         } finally {
@@ -121,6 +162,7 @@ public class DataAccess {
             result.is_fearture = rs.getInt("is_fearture") == 1;
             result.link_youtube = rs.getString("link_youtube");
             result.is_active = rs.getInt("is_active") == 1;
+            result.category_set = getGameCategory(id);
             return result;
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
@@ -285,6 +327,63 @@ public class DataAccess {
                 result.add(categoryEntity);
             }
 
+        } catch (ClassNotFoundException cnfex) {
+            logger.error(cnfex.getMessage(), cnfex);
+        } finally {
+            closeConnection();
+        }
+        return result;
+    }
+
+    public static HashMap<Integer, CategoryEntity> getCategoryMap() throws SQLException {
+        HashMap<Integer, CategoryEntity> result = new HashMap();
+        List<CategoryEntity> categoryList = getCategoryList();
+        for (CategoryEntity categoryEntity : categoryList) {
+            result.put(categoryEntity.id, categoryEntity);
+        }
+        return result;
+
+    }
+
+    public static int[] setGameCategory(int gameID, HashSet<Integer> categorySet) throws SQLException {
+        int[] row = {};
+        try {
+            getConnection();
+            String sqlDelete = "delete from game_category where game_id=:game_id ";
+            NamedParameterStatement statementDelete = new NamedParameterStatement(conn, sqlDelete);
+            statementDelete.setInt("game_id", gameID);
+            statementDelete.executeUpdate();
+            String sql = "insert IGNORE into game_category(game_id,category_id) values(:game_id,:category_id) ";
+            NamedParameterStatement statement = new NamedParameterStatement(conn, sql);
+            for (Integer categoryID : categorySet) {
+                statement.setInt("game_id", gameID);
+                statement.setInt("category_id", categoryID);
+                statement.addBatch();
+            }
+            logger.info(statement.toString());
+            row = statement.executeBatch();
+        } catch (ClassNotFoundException cnfex) {
+            logger.error(cnfex.getMessage(), cnfex);
+        } finally {
+            closeConnection();
+        }
+        return row;
+    }
+
+    public static HashSet<Integer> getGameCategory(int gameID) throws SQLException {
+        HashSet<Integer> result = new HashSet();
+
+        try {
+            getConnection();
+            String sql = "select  category_id from game_category where game_id=:game_id ";
+            NamedParameterStatement statement = new NamedParameterStatement(conn, sql);
+            statement.setInt("game_id", gameID);
+            logger.info(statement.toString());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Integer categoryID = resultSet.getInt("category_id");
+                result.add(categoryID);
+            }
         } catch (ClassNotFoundException cnfex) {
             logger.error(cnfex.getMessage(), cnfex);
         } finally {

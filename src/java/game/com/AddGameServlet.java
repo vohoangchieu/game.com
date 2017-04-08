@@ -81,9 +81,11 @@ public class AddGameServlet extends BaseServlet {
             showBaseSection(dic);
             for (CategoryEntity categoryEntity : AppConfig.categoryList) {
                 TemplateDataDictionary nav = dic.addSection("CATEGORY");
-                nav.setVariable("CATEGORY_ID", categoryEntity.url);
+                nav.setVariable("CATEGORY_ID", String.valueOf(categoryEntity.id));
                 nav.setVariable("CATEGORY_NAME", categoryEntity.name);
-
+                if(gameEntity.category_set.contains(categoryEntity.id)){
+                    nav.setVariable("checked", "checked");
+                }
             }
             Template template = getCTemplate("add-game");
             String data = template.renderToString(dic);

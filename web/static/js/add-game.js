@@ -57,7 +57,7 @@ function handleAdd() {
     var is_promote = $("#is_promote:checked").length;
     var is_fearture = $("#is_fearture:checked").length;
     var is_active = $("#is_active:checked").length;
-    var category = $("#category").val();
+    var category = getCategoryVal();
     var long_desc = tinyMCE.activeEditor.getContent();
     $.ajax({
         url: "/admin/ajax/add-game",
@@ -75,63 +75,40 @@ function handleAdd() {
             is_fearture: is_fearture,
             is_active: is_active,
             category: category,
-//            image:image,
             long_desc: long_desc,
         },
         beforeSend: function () {
         },
         success: function (resp) {
-//            hideLoading();
-//            console.log(data);
             if (resp.returnCode == 1) {
-                window.location = "/admin/add-game?id=" + resp.data;
-//                var link = '<a style="color:#fff" href="/admin/add-game?id=' + data.id + '" target="_blank">' + $("#name").val() + "</a>";
-//                $.ambiance({
-//                    type: "success",
-//                    message: "Xử lý thành công. Link sản phẩm: " + link,
-//                    fade: true,
-//                    timeout: 2
-//                });
-//                setTimeout(function () {
-//                    window.location = data.msg
-//                }, 2000);
+                if (id > 0) {
+                    $.ambiance({
+                        type: "success",
+                        message: "update success",
+                        fade: true,
+                        timeout: 2
+                    });
+                } else {
+                    $.ambiance({
+                        type: "success",
+                        message: "insert success",
+                        fade: true,
+                        timeout: 2
+                    });
+                    setTimeout(function () {
+                        window.location = "/admin/add-game?id=" + resp.data;
+                    }, 2000);
+                }
             } else {
                 showWarning(resp.msg);
             }
         },
         error: function (e) {
-            showWarning("Có lỗi xảy ra vui lòng thử lại sau");
+            showWarning("error");
         }
     });
 }
-//function validateInput() {
-//    if ($("#name").val().trim() == "") {
-//        $("#error").html("Nhập tên sản phẩm");
-//        return false;
-//    }
-//    if ($("#title").val().trim() == "") {
-//        $("#error").html("Nhập tiêu đề website");
-//        return false;
-//    }
-//    if ($("#price").val().trim() == '') {
-//        $("#error").html("Nhập giá sản phẩm");
-//        return false;
-//    }
-//    if ($("#warranty").val().trim() == '') {
-//        $("#error").html("Nhập thời gian bảo hành");
-//        return false;
-//    }
-//    if ($("#category").val().trim() == '') {
-//        $("#error").html("Chọn danh mục sản phẩm");
-//        return false;
-//    }
-//    if ($("#thumb").attr("src") == "#") {
-//        $("#error").html("Chọn hình ảnh sản phẩm");
-//        return false;
-//    }
-//    $("#error").html("");
-//    return true;
-//}
+
 function allowNumber(e) {
     var key = e.charCode || e.keyCode || 0;
     // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
@@ -162,12 +139,12 @@ $(function () {
                 $("#thumb").attr("src", data.result.data + "?" + (new Date()).getMilliseconds());
                 $.ambiance({
                     type: "success",
-                    message: "Xử lý thành công",
+                    message: "upload success",
                     fade: true,
                     timeout: 3
                 });
             } else {
-                showWarning("Xử lý thất bại");
+                showWarning("upload error");
             }
 
         },
@@ -192,12 +169,12 @@ $(function () {
 //                $("#nes").attr("href", data.result.data + "?" + (new Date()).getMilliseconds());
                 $.ambiance({
                     type: "success",
-                    message: "Xử lý thành công",
+                    message: "upload success",
                     fade: true,
                     timeout: 3
                 });
             } else {
-                showWarning("Xử lý thất bại");
+                showWarning("upload error");
             }
 
         },
@@ -212,3 +189,14 @@ $(function () {
     }).prop('disabled', !$.support.fileInput)
             .parent().addClass($.support.fileInput ? undefined : 'disabled');
 });
+
+function getCategoryVal() {
+    var ret = "";
+    $(".category").each(function () {
+        if ($(this).is(":checked")) {
+            console.log($(this).val());
+            ret += $(this).val() + ",";
+        }
+    })
+    return ret;
+}

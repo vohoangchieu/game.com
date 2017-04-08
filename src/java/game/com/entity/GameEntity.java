@@ -5,6 +5,8 @@
  */
 package game.com.entity;
 
+import java.util.HashSet;
+
 /**
  *
  * @author chieuvh
@@ -21,4 +23,5 @@ public class GameEntity extends BaseEntity{
    public boolean is_fearture;
    public String link_youtube;
    public boolean is_active;
+   public HashSet<Integer> category_set;
 }
