@@ -175,12 +175,22 @@
                 </div>
                 <div style="width: 100%;display: block;margin: 0 5px 0 5px;">
                     <div class="wrap-input">
-                        <div class="label" style="width: 300px">Cập nhật hình ảnh</div>
+                        <div class="label" style="width: 300px">Thumb</div>
                         <input type="file" name="image" value="" id="image-file"/></div>
                     <div style="clear:both"></div>
 
                     <div style="width: 100%;display: block;margin: 10px;margin-left: auto;margin-right: auto">
                         <img id="thumb" src="{{thumb}}" style="display: block;margin-left: auto;margin-right: auto"/>
+                    </div>
+                </div>
+                <div style="width: 100%;display: block;margin: 0 5px 0 5px;">
+                    <div class="wrap-input">
+                        <div class="label" style="width: 300px">Thumb</div>
+                        <input type="file" name="imagegalery" value="" id="image-gallery" multiple/></div>
+                    <div style="clear:both"></div>
+
+                    <div style="width: 100%;display: block;margin: 10px;margin-left: auto;margin-right: auto">
+                        <img id="thumb" src="{{imagegalery}}" style="display: block;margin-left: auto;margin-right: auto"/>
                     </div>
                 </div>
 
