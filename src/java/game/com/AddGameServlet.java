@@ -13,6 +13,8 @@ import hapax.Template;
 import hapax.TemplateDataDictionary;
 import hapax.TemplateDictionary;
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -76,6 +78,13 @@ public class AddGameServlet extends BaseServlet {
                 dic.setVariable("is_active_checked", gameEntity.is_active ? "checked" : "");
                 dic.setVariable("thumb", getThumbUrl(String.valueOf(gameID)));
                 dic.setVariable("nes", getNesFileUrl(String.valueOf(gameID)));
+                List<String> gallery = getGalleryImage(String.valueOf(gameEntity.id));
+                for (String image : gallery) {
+                    TemplateDataDictionary nav = dic.addSection("GALLERY");
+                    String imgageurl = "/resource/gallery/" + gameEntity.id + "/" + image + ".png?" + System.currentTimeMillis();
+                    nav.setVariable("imageurl", imgageurl);
+                    nav.setVariable("imagename", image);
+                }
             }
 
             showBaseSection(dic);
@@ -83,7 +92,7 @@ public class AddGameServlet extends BaseServlet {
                 TemplateDataDictionary nav = dic.addSection("CATEGORY");
                 nav.setVariable("CATEGORY_ID", String.valueOf(categoryEntity.id));
                 nav.setVariable("CATEGORY_NAME", categoryEntity.name);
-                if(gameEntity.category_set.contains(categoryEntity.id)){
+                if (gameEntity != null && gameEntity.category_set.contains(categoryEntity.id)) {
                     nav.setVariable("checked", "checked");
                 }
             }

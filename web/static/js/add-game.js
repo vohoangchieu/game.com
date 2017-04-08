@@ -148,9 +148,9 @@ $(function () {
             }
 
         },
-        progressall: function (e, data) {
+        progressall: function (e, resp) {
             var width = 700;//$("#progress").width();
-            var progress = parseInt(data.loaded / data.total * 100, 10) / 100;
+            var progress = parseInt(resp.loaded / resp.total * 100, 10) / 100;
             $('#progress .progress-bar').css(
                     'width',
                     progress * width + 'px'
@@ -164,8 +164,8 @@ $(function () {
         maxFileSize: 5000000, // 5 MB
         url: '/admin/handle-upload-game-nes/',
         dataType: 'json',
-        done: function (e, data) {
-            if (data.result.returnCode == 1) {
+        done: function (e, resp) {
+            if (resp.result.returnCode == 1) {
 //                $("#nes").attr("href", data.result.data + "?" + (new Date()).getMilliseconds());
                 $.ambiance({
                     type: "success",
@@ -173,6 +173,49 @@ $(function () {
                     fade: true,
                     timeout: 3
                 });
+            } else {
+                showWarning("upload error");
+            }
+
+        },
+        progressall: function (e, data) {
+            var width = 700;//$("#progress").width();
+            var progress = parseInt(data.loaded / data.total * 100, 10) / 100;
+            $('#progress .progress-bar').css(
+                    'width',
+                    progress * width + 'px'
+                    );
+        }
+    }).prop('disabled', !$.support.fileInput)
+            .parent().addClass($.support.fileInput ? undefined : 'disabled');
+    $('#image-gallery-file').fileupload({
+        formData: {id: $("#id").val()},
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+        maxFileSize: 5000000, // 5 MB
+        url: '/admin/handle-upload-game-gallery/',
+        dataType: 'json',
+        done: function (e, resp) {
+            if (resp.result.returnCode == 1) {
+                $.ambiance({
+                    type: "success",
+                    message: "upload success",
+                    fade: true,
+                    timeout: 3
+                });
+                $("#image-gallery").html("");
+                var images = $.parseJSON(resp.result.data);
+                for (var i = 0; i < images.length; i++) {
+                    var image = images[i];
+                    var imageurl = "/resource/gallery/" + $("#id").val() + "/" + images[i] + ".png?" + (new Date()).getMilliseconds();
+//                    $("#image-gallery").append("<img src='" + imgurl + "' >");
+                    var html = '<div class="gallery-wrapper" id="gallery-wrapper-{{image}}">' +
+                            ' <img src="{{imageurl}}"/>' +
+                            ' <a href="javascript:deleteGalleryImage(\'{{image}}\')" >delete {{image}}</a>' +
+                            '</div >';
+                    html = html.replace(/{{image}}/g, image);
+                    html = html.replace(/{{imageurl}}/g, imageurl);
+                    $("#image-gallery").append(html);
+                }
             } else {
                 showWarning("upload error");
             }
@@ -199,4 +242,36 @@ function getCategoryVal() {
         }
     })
     return ret;
+}
+function deleteGalleryImage(imagename) {
+
+    var id = $("#id").val();
+
+    $.ajax({
+        url: "/admin/ajax/add-delete-game-gallery-image/",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            id: id,
+            imagename: imagename,
+        },
+        beforeSend: function () {
+        },
+        success: function (resp) {
+            if (resp.returnCode == 1) {
+                $.ambiance({
+                    type: "success",
+                    message: "remove success",
+                    fade: true,
+                    timeout: 2
+                });
+                $("#gallery-wrapper-" + imagename).remove();
+            } else {
+                showWarning(resp.msg);
+            }
+        },
+        error: function (e) {
+            showWarning("error");
+        }
+    });
 }

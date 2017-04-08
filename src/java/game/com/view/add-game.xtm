@@ -76,6 +76,28 @@
                         .paddingtop6{
                             padding-top: 6px;
                         }
+                        .gallery-wrapper a{
+                            position: absolute;
+                            left: 10px;
+                            top: 10px;
+                            color: red;
+                            font-size: large;
+                            background: #fff;
+                        }
+                        .gallery-wrapper img{
+                            position: absolute;
+                            left: 0px;
+                            top: 0px;
+                        }
+                        .gallery-wrapper{
+                            width: 260px;
+                            height: 240px;
+                            position: relative;
+                            float: left;
+                            margin: 5px;
+                            border: 1px solid #cfcfcf;
+
+                        }
                     </style>
                     <input type="hidden" id="id" value="{{id}}"/>
                     <div class="wrap-input" >
@@ -185,12 +207,17 @@
                 </div>
                 <div style="width: 100%;display: block;margin: 0 5px 0 5px;">
                     <div class="wrap-input">
-                        <div class="label" style="width: 300px">Thumb</div>
-                        <input type="file" name="imagegalery" value="" id="image-gallery" multiple/></div>
+                        <div class="label" style="width: 300px">Gallery</div>
+                        <input type="file" name="imagegallery" value="" id="image-gallery-file" multiple/></div>
                     <div style="clear:both"></div>
 
-                    <div style="width: 100%;display: block;margin: 10px;margin-left: auto;margin-right: auto">
-                        <img id="thumb" src="{{imagegalery}}" style="display: block;margin-left: auto;margin-right: auto"/>
+                    <div style="width: 100%;display: block;margin: 10px;margin-left: auto;margin-right: auto" id="image-gallery">
+                        {{#GALLERY}}
+                        <div class="gallery-wrapper" id="gallery-wrapper-{{imagename}}">
+                            <img src="{{imageurl}}"/>
+                            <a href="javascript:deleteGalleryImage('{{imagename}}')" >delete {{imagename}}</a>
+                        </div >
+                        {{/GALLERY}}
                     </div>
                 </div>
 

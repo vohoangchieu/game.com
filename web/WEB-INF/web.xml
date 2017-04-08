@@ -47,20 +47,20 @@
         <url-pattern>/admin/handle-upload-game-nes/*</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>AjaxUpdateGameServlet</servlet-name>
-        <servlet-class>game.com.AjaxUpdateGameServlet</servlet-class>
+        <servlet-name>HandleUploadGameGalleryServlet</servlet-name>
+        <servlet-class>game.com.HandleUploadGameGalleryServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AjaxUpdateGameServlet</servlet-name>
-        <url-pattern>/ajax/update-game</url-pattern>
+        <servlet-name>HandleUploadGameGalleryServlet</servlet-name>
+        <url-pattern>/admin/handle-upload-game-gallery/*</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>AjaxDeleteGameServlet</servlet-name>
-        <servlet-class>game.com.AjaxDeleteGameServlet</servlet-class>
+     <servlet>
+        <servlet-name>AjaxDeleteGameGalleryImageServlet</servlet-name>
+        <servlet-class>game.com.AjaxDeleteGameGalleryImageServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AjaxDeleteGameServlet</servlet-name>
-        <url-pattern>/ajax/delete-game</url-pattern>
+        <servlet-name>AjaxDeleteGameGalleryImageServlet</servlet-name>
+        <url-pattern>/admin/ajax/add-delete-game-gallery-image/*</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>StaticResourceServlet</servlet-name>

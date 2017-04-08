@@ -11,8 +11,10 @@ import hapax.TemplateDataDictionary;
 import hapax.TemplateException;
 import hapax.TemplateLoader;
 import hapax.TemplateResourceLoader;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -92,8 +94,21 @@ public class BaseServlet extends HttpServlet {
     protected String getThumbUrl(String gameID) {
         return "/resource/thumb/" + gameID + ".png";
     }
+
     protected String getNesFileUrl(String gameID) {
         return "/resource/nes/" + gameID + ".zip";
+    }
+
+    protected List<String> getGalleryImage(String gameID) {
+        List<String> gallery = new ArrayList();
+        File folder = new File(AppConfig.OPENSHIFT_DATA_DIR + "/gallery/" + gameID);
+        for (File image : folder.listFiles()) {
+            if (image.isDirectory()) {
+                continue;
+            }
+            gallery.add(image.getName().substring(0, image.getName().lastIndexOf(".")));
+        }
+        return gallery;
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

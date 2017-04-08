@@ -37,19 +37,38 @@ public class StaticResourceServlet extends BaseServlet {
                 OPENSHIFT_DATA_DIR = "/zserver/data/openshift";
             }
             logger.info("OPENSHIFT_DATA_DIR " + OPENSHIFT_DATA_DIR);
-            File file = new File(OPENSHIFT_DATA_DIR,  part[2]+ "/" + part[3]);
-            if (file.isDirectory()) {
-                return;
-            }
-            if (!file.exists()) {
-                return;
-            }
+            File file = new File(OPENSHIFT_DATA_DIR, part[2] + "/" + part[3]);
+
             switch (part[2]) {
                 case "nes":
+                    if (!file.exists()) {
+                        return;
+                    }
+                    if (file.isDirectory()) {
+                        return;
+                    }
                     response.setHeader("Content-disposition", "attachment; filename=\"" + file.getName() + "\"");
                     break;
                 case "thumb":
+                    if (!file.exists()) {
+                        return;
+                    }
+                    if (file.isDirectory()) {
+                        return;
+                    }
+                    response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
+                    break;
                 case "gallery":
+                    if (part.length < 5) {
+                        return;
+                    }
+                    file = new File(OPENSHIFT_DATA_DIR, part[2] + "/" + part[3] + "/" + part[4]);
+                    if (!file.exists()) {
+                        return;
+                    }
+                    if (file.isDirectory()) {
+                        return;
+                    }
                     response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
                     break;
                 default:
