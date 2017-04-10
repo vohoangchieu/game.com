@@ -7,7 +7,6 @@
         <script src="/static/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
         <script src="/static/js/add-game.js"></script>
         <script src="/static/js/jquery.ambiance.js"></script>
-        <script src="/static/js/ScriptToolTip.js" type="text/javascript"></script>
 
     </head>
     <body>

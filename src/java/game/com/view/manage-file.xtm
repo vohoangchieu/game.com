@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+        {{>header}}
+        <script src="/static/js/jquery-1.7.2.min.js"></script>
+        <link rel="stylesheet" href="/static/css/jquery.ambiance.css"/>
+        <script src="/static/js/common.js"></script>
+        <script src="/static/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+        <script src="/static/js/jquery.ambiance.js"></script>
+        <script src="/static/js/fileupload/vendor/jquery.ui.widget.js"></script>
+        <script src="/static/js/fileupload/jquery.iframe-transport.js"></script>
+        <script src="/static/js/fileupload/jquery.fileupload.js"></script>
+        <script>
+var path = '{{path}}';
+        </script>
+    </head>
+    <body>
+        <style>
+            a{
+                text-decoration: underline;
+            }
+            .delete{
+                color: red;
+            }
+            .download{
+                color: green;
+            }
+            .wrap-input{
+                margin: 5px;
+                padding-bottom: 5px;
+                border-bottom: 1px solid #dfdfdf;
+            }
+            .file,.folder{
+                padding: 5px;
+            }
+        </style>
+        <form name="form1" method="post" action="#" id="form1">
+            <h1>{{path}}</h1>
+            <div class="wrap-input">
+                <div class="label" style="width: 300px">Upload</div>
+                <input type="file" name="uploadfile" value="" id="upload-file" multiple/>
+            </div>
+            <div class="wrap-input">
+                <input type="text" name="folder" value="" id="create-folder-name"/>
+                <input type="button" value="create folder in {{path}}" onclick="createFolder()"/>
+            </div>
+            <h2>folder</h2>
+            {{#FOLDER}}
+            <div class="folder">
+                <a href="/admin/manage-file?path={{path}}">{{fullpath}}</a>
+                <a class="delete" href="javascript:;" onclick="deleteFile('{{path}}')">delete</a>
+                <a class="download" href="/admin/download-folder?path={{path}}">download</a>
+            </div>
+            {{/FOLDER}}
+            <br/>
+            <h2>file</h2>
+            {{#FILE}}
+            <div class="file">
+                <a href="/admin/manage-file?path={{path}}">{{path}}</a>
+                <a class="delete" href="javascript:;" onclick="deleteFile('{{path}}')">delete</a>
+                <a class="download" href="/admin/download-folder?path={{path}}">download</a>
+                <p>{{imgurl}}</p>
+                {{#img}}
+                <a><img src="{{imgurl}}"/></a>
+                {{/img}}
+                <br/>
+            </div>
+            {{/FILE}}
+        </form>
+        <script src="/static/js/manage-file.js"></script>
+    </body></html>

@@ -13,6 +13,46 @@
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ManageFileServlet</servlet-name>
+        <servlet-class>game.com.ManageFileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ManageFileServlet</servlet-name>
+        <url-pattern>/admin/manage-file/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>HandleUploadFileServlet</servlet-name>
+        <servlet-class>game.com.HandleUploadFileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HandleUploadFileServlet</servlet-name>
+        <url-pattern>/admin/handle-upload-file/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>HandleDeleteFileServlet</servlet-name>
+        <servlet-class>game.com.HandleDeleteFileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HandleDeleteFileServlet</servlet-name>
+        <url-pattern>/admin/handle-delete-file/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>HandleCreateFolderServlet</servlet-name>
+        <servlet-class>game.com.HandleCreateFolderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HandleCreateFolderServlet</servlet-name>
+        <url-pattern>/admin/handle-create-folder/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>HandleDownloadFolderServlet</servlet-name>
+        <servlet-class>game.com.HandleDownloadFolderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HandleDownloadFolderServlet</servlet-name>
+        <url-pattern>/admin/download-folder/*</url-pattern>
+    </servlet-mapping>
     <!--tram -->
     <servlet>
         <servlet-name>AddGameServlet</servlet-name>
@@ -54,7 +94,7 @@
         <servlet-name>HandleUploadGameGalleryServlet</servlet-name>
         <url-pattern>/admin/handle-upload-game-gallery/*</url-pattern>
     </servlet-mapping>
-     <servlet>
+    <servlet>
         <servlet-name>AjaxDeleteGameGalleryImageServlet</servlet-name>
         <servlet-class>game.com.AjaxDeleteGameGalleryImageServlet</servlet-class>
     </servlet>
@@ -70,9 +110,7 @@
         <servlet-name>StaticResourceServlet</servlet-name>
         <url-pattern>/resource/*</url-pattern>
     </servlet-mapping>
-
     <!--static -->
-   
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>/static/*</url-pattern>

@@ -14,6 +14,7 @@ import hapax.TemplateResourceLoader;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -55,7 +56,7 @@ public class BaseServlet extends HttpServlet {
 
     protected String[] parseUriRequest(HttpServletRequest req) {
 
-        String uripath = req.getRequestURI();
+        String uripath = URLDecoder.decode(req.getRequestURI());
         return uripath.split("/");
 
     }
@@ -102,6 +103,12 @@ public class BaseServlet extends HttpServlet {
     protected List<String> getGalleryImage(String gameID) {
         List<String> gallery = new ArrayList();
         File folder = new File(AppConfig.OPENSHIFT_DATA_DIR + "/gallery/" + gameID);
+        if (!folder.exists()) {
+            return gallery;
+        }
+        if (folder.listFiles() == null) {
+            return gallery;
+        }
         for (File image : folder.listFiles()) {
             if (image.isDirectory()) {
                 continue;

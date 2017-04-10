@@ -31,9 +31,9 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author chieuvh
  */
-public class HandleUploadGameGalleryServlet extends BaseServlet {
+public class HandleUploadFileServlet extends BaseServlet {
 
-    private static final Logger logger = Logger.getLogger(HandleUploadGameGalleryServlet.class);
+    private static final Logger logger = Logger.getLogger(HandleUploadFileServlet.class);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -77,19 +77,32 @@ public class HandleUploadGameGalleryServlet extends BaseServlet {
         // maximum file size to be uploaded.
         upload.setSizeMax(maxFileSize);
         Map<String, List<FileItem>> postData = upload.parseParameterMap(request);
-        String id = postData.get("id").get(0).getString();
-        if (StringUtils.isBlank(id)) {
-            logger.info("id= " + id);
+        if (postData.get("path") == null) {
+            responseObject.returnCode = 0;
+            responseObject.returnMessage = "invalid request";
+            return;
         }
-        File folder = new File(AppConfig.OPENSHIFT_DATA_DIR + "/gallery/" + id);
+        String path = postData.get("path").get(0).getString();
+        if (path == null) {
+            responseObject.returnCode = 0;
+            responseObject.returnMessage = "invalid request";
+            return;
+        }
+        File folder = new File(path);
         if (!folder.exists()) {
-            folder.mkdir();
+            responseObject.returnCode = 0;
+            responseObject.returnMessage = "path not exist";
+            return;
+        }
+        if (folder.getAbsolutePath().startsWith(AppConfig.OPENSHIFT_DATA_DIR) == false) {
+            responseObject.returnCode = 0;
+            responseObject.returnMessage = "invalid path";
+            return;
         }
         try {
             // Parse the request to get file items.
-            List<FileItem> fileItems = postData.get("imagegallery");
+            List<FileItem> fileItems = postData.get("uploadfile");
             // Process the uploaded file items
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MMddhhmmSSS");
             for (FileItem fi : fileItems) {
                 if (!fi.isFormField()) {
                     // Get the uploaded file parameters
@@ -99,16 +112,14 @@ public class HandleUploadGameGalleryServlet extends BaseServlet {
 //                    boolean isInMemory = fi.isInMemory();
 //                    long sizeInBytes = fi.getSize();
                     // Write the file
-                    String filename = dateFormat.format(new Date());
-                    file = new File(AppConfig.OPENSHIFT_DATA_DIR + "/gallery/" + id + "/" + filename + ".png");
+                    file = new File(path + "/" + fi.getName());
                     fi.write(file);
+                    logger.info("upload " + file.getAbsolutePath());
                 } else {
                     logger.info("isFormField " + fi.getFieldName());
                 }
             }
-            List<String> gallery = getGalleryImage(id);
-            
-            responseObject.data = new Gson().toJson(gallery);
+
             responseObject.returnCode = 1;
             responseObject.returnMessage = "success";
 
@@ -117,4 +128,11 @@ public class HandleUploadGameGalleryServlet extends BaseServlet {
         }
     }
 
+    private String getPath(HttpServletRequest request) {
+        if (request.getParameter("path") == null) {
+            return null;
+        }
+        return request.getParameter("path").trim();
+
+    }
 }

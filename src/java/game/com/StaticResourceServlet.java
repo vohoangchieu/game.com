@@ -50,6 +50,7 @@ public class StaticResourceServlet extends BaseServlet {
                     response.setHeader("Content-disposition", "attachment; filename=\"" + file.getName() + "\"");
                     break;
                 case "thumb":
+                case "image":
                     if (!file.exists()) {
                         return;
                     }
