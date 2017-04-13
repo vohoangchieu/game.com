@@ -7,6 +7,7 @@ package game.com;
 
 import game.com.entity.CategoryEntity;
 import game.com.entity.GameEntity;
+import game.com.entity.PostEntity;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -171,141 +172,103 @@ public class DataAccess {
         }
         return result;
     }
-//
-//    public List<TramBTSEntity> getAllTramBTS() throws SQLException {
-//        List<TramBTSEntity> result = new ArrayList();
-//        String sql = "select  "
-//                + "`MaSo`, `TenTram`, `NgayLapDat`, `DiaChiLapDat`, `TinhThanhLD`, "
-//                + "`QuanHuyenLD`, `PhuongXaLD`, `TrangThai`, `DonViThue`,"
-//                + " `ToaDoKD`, `ToaDoVD`, `LoaiTram`, `LoaiCotAT`, `ChieuCao`,"
-//                + " `DTSanLap`, `DienThoaiDVQL`, "
-//                + " `ThueDDTuNgay`, `ThueDDDenNgay`, "
-//                + "`NgayDuaVaoSuDung`, "
-//                + " `DaKiemTra`,`GhiChu`,`TenDVQL` "
-//                + " from `thongtin_trambts` where IsActive=1";
-//
-//        try {
-//            getConnection();
-//            NamedParameterStatement statement = new NamedParameterStatement(conn, sql);
-//            logger.info(statement.toString());
-//            ResultSet resultSet = statement.executeQuery();
-//            while (resultSet.next()) {
-//                TramBTSEntity entity = new TramBTSEntity();
-//                entity.MaSo = resultSet.getInt("MaSo");
-//                entity.TenTram = resultSet.getString("TenTram");
-//                entity.NgayLapDat = resultSet.getTimestamp("NgayLapDat");
-//                entity.DiaChiLapDat = resultSet.getString("DiaChiLapDat");
-//                entity.TinhThanhLD = resultSet.getInt("TinhThanhLD");
-//                entity.QuanHuyenLD = resultSet.getInt("QuanHuyenLD");
-//                entity.PhuongXaLD = resultSet.getInt("PhuongXaLD");
-//                entity.TrangThai = resultSet.getInt("TrangThai");
-//                entity.DonViThue = resultSet.getString("DonViThue");
-//                entity.ToaDoKD = resultSet.getFloat("ToaDoKD");
-//                entity.ToaDoVD = resultSet.getFloat("ToaDoVD");
-//                entity.LoaiTram = resultSet.getInt("LoaiTram");
-//                entity.LoaiCotAT = resultSet.getString("LoaiCotAT");
-//                entity.ChieuCao = resultSet.getFloat("ChieuCao");
-//                entity.DTSanLap = resultSet.getFloat("DTSanLap");
-//                entity.ThueDDTuNgay = resultSet.getTimestamp("ThueDDTuNgay");
-//                entity.ThueDDDenNgay = resultSet.getTimestamp("ThueDDDenNgay");
-//                entity.NgayDuaVaoSuDung = resultSet.getTimestamp("NgayDuaVaoSuDung");
-//                entity.DaKiemTra = resultSet.getInt("DaKiemTra") == 1;
-//                entity.GhiChu = resultSet.getString("GhiChu");
-//                entity.TenDVQL = resultSet.getString("TenDVQL");
-//                result.add(entity);
-//            }
-//
-//        } catch (Exception ex) {
-//            logger.error(ex.getMessage(), ex);
-//        } finally {
-////            closeConnection();
-//        }
-//        return result;
-//    }
-//
-//    public List<TuyenCapEntity> getAllTuyenCap() throws SQLException {
-//        List<TuyenCapEntity> result = new ArrayList();
-//        String sql = "select  "
-//                + " * "
-//                + " from `tuyencap`";
-//
-//        try {
-//            getConnection();
-//            NamedParameterStatement statement = new NamedParameterStatement(conn, sql);
-//            logger.info(statement.toString());
-//            ResultSet resultSet = statement.executeQuery();
-//            while (resultSet.next()) {
-//                TuyenCapEntity entity = new TuyenCapEntity();
-//                entity.Id = resultSet.getInt("Id");
-//                entity.Ten = resultSet.getString("Ten");
-//                entity.X1 = resultSet.getFloat("X1");
-//                entity.Y1 = resultSet.getFloat("Y1");
-//                entity.X2 = resultSet.getFloat("X2");
-//                entity.Y2 = resultSet.getFloat("Y2");
-//                result.add(entity);
-//            }
-//
-//        } catch (Exception ex) {
-//            logger.error(ex.getMessage(), ex);
-//        } finally {
-////            closeConnection();
-//        }
-//        return result;
-//    }
-//
-//    public int updateTramBTS(TramBTSEntity tramBTSEntity) throws SQLException {
-//        int row = -1;
-//        try {
-//            getConnection();
-//            String sql = "update thongtin_trambts "
-//                    + "set TenTram=:TenTram,"
-//                    + "NgayLapDat=:NgayLapDat,DiaChiLapDat=:DiaChiLapDat, "
-//                    + "TinhThanhLD=:TinhThanhLD,QuanHuyenLD=:QuanHuyenLD, "
-//                    + "PhuongXaLD=:PhuongXaLD,TrangThai=:TrangThai, "
-//                    + "DonViThue=:DonViThue,TenDVQL=:TenDVQL, "
-//                    + "ToaDoKD=:ToaDoKD,ToaDoVD=:ToaDoVD,ChieuCao=:ChieuCao "
-//                    + "where MaSo=:MaSo";
-//            NamedParameterStatement statement = new NamedParameterStatement(conn, sql);
-//            statement.setInt("MaSo", tramBTSEntity.MaSo);
-//            statement.setString("TenTram", tramBTSEntity.TenTram);
-//            statement.setTimestamp("NgayLapDat", new Timestamp(tramBTSEntity.NgayLapDat.getTime()));
-//            statement.setString("DiaChiLapDat", tramBTSEntity.DiaChiLapDat);
-//            statement.setInt("TinhThanhLD", tramBTSEntity.TinhThanhLD);
-//            statement.setInt("QuanHuyenLD", tramBTSEntity.QuanHuyenLD);
-//            statement.setInt("PhuongXaLD", tramBTSEntity.PhuongXaLD);
-//            statement.setInt("TrangThai", tramBTSEntity.TrangThai);
-//            statement.setString("DonViThue", tramBTSEntity.DonViThue);
-//            statement.setString("TenDVQL", tramBTSEntity.TenDVQL);
-//            statement.setFloat("ToaDoVD", tramBTSEntity.ToaDoVD);
-//            statement.setFloat("ToaDoKD", tramBTSEntity.ToaDoKD);
-//            statement.setFloat("ChieuCao", tramBTSEntity.ChieuCao);
-//            logger.info(statement.toString());
-//            row = statement.executeUpdate();
-//        } catch (ClassNotFoundException cnfex) {
-//            logger.error(cnfex.getMessage(), cnfex);
-//        } finally {
-////            closeConnection();
-//        }
-//        return row;
-//    }
-//
-//    public int deleteTramBTS(int MaSo) throws SQLException {
-//        int row = -1;
-//        try {
-//            getConnection();
-//            String sql = "delete from thongtin_trambts "
-//                    + "where MaSo=:MaSo";
-//            NamedParameterStatement statement = new NamedParameterStatement(conn, sql);
-//            statement.setInt("MaSo", MaSo);
-//            logger.info(statement.toString());
-//            row = statement.executeUpdate();
-//        } catch (ClassNotFoundException cnfex) {
-//            logger.error(cnfex.getMessage(), cnfex);
-//        } finally {
-////            closeConnection();
-//        }
-//        return row;
-//    }
+
+    public static int insertPost(PostEntity postEntity) throws SQLException {
+        logger.info("insert " + postEntity.toJsonString());
+        String sql = "INSERT INTO `post`("
+                + " `url`, `title`, `keyword`, `description`, "
+                + "`content`, `order_weight`, `is_active`) values ("
+                + " :url, :title, :keyword, :description, "
+                + ":content, :order_weight, :is_active)";
+        int row = 0;
+        try {
+            getConnection();
+            NamedParameterStatement statement = new NamedParameterStatement(conn, sql, Statement.RETURN_GENERATED_KEYS);
+//            statement.setInt("id", gameEntity.id);
+            statement.setString("url", postEntity.url);
+            statement.setString("title", postEntity.title);
+            statement.setString("keyword", postEntity.keyword);
+            statement.setString("description", postEntity.description);
+            statement.setString("content", postEntity.content);
+            statement.setInt("order_weight", postEntity.order_weight);
+            statement.setInt("is_active", postEntity.is_active ? 1 : 0);
+
+            logger.info(statement.toString());
+            row = statement.executeUpdate();
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next()) {
+                row = rs.getInt(1);
+            }
+            postEntity.id = row;
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+        } finally {
+            closeConnection();
+        }
+        return row;
+    }
+
+    public static int updatePost(PostEntity postEntity) throws SQLException {
+        logger.info("update " + postEntity.toJsonString());
+        String sql = "update `post` set "
+                + "`url`= :url, `title`=:title, `keyword`=:keyword,"
+                + "`description`= :description, "
+                + "`content`=:content, `order_weight`=:order_weight,"
+                + " `is_active`=:is_active "
+                + " where `id`=:id";
+        int row = 0;
+        try {
+            getConnection();
+            NamedParameterStatement statement = new NamedParameterStatement(conn, sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt("id", postEntity.id);
+            statement.setString("url", postEntity.url);
+            statement.setString("title", postEntity.title);
+            statement.setString("keyword", postEntity.keyword);
+            statement.setString("description", postEntity.description);
+            statement.setString("content", postEntity.content);
+            statement.setInt("order_weight", postEntity.order_weight);
+            statement.setInt("is_active", postEntity.is_active ? 1 : 0);
+
+            logger.info(statement.toString());
+            row = statement.executeUpdate();
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+        } finally {
+            closeConnection();
+        }
+        return row;
+    }
+
+    public static PostEntity getPost(int id) throws SQLException {
+        String sql = "select * from `post` where id=:id";
+        PostEntity result = null;
+        try {
+            getConnection();
+            NamedParameterStatement statement = new NamedParameterStatement(conn, sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt("id", id);
+            logger.info(statement.toString());
+            ResultSet rs = statement.executeQuery();
+            if (!rs.next()) {
+                return result;
+            }
+            result = new PostEntity();
+            result.id = id;
+            result.url = rs.getString("url");
+            result.title = rs.getString("title");
+            result.keyword = rs.getString("keyword");
+            result.description = rs.getString("description");
+            result.content = rs.getString("content");
+            result.order_weight = rs.getInt("order_weight");
+            result.is_active = rs.getInt("is_active") == 1;
+            return result;
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+        } finally {
+            closeConnection();
+        }
+        return result;
+    }
+
 
     public static List<CategoryEntity> getCategoryList() throws SQLException {
         List<CategoryEntity> result = new ArrayList();

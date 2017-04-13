@@ -27,6 +27,7 @@ public class AppContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         try {
+            int a;
             logger.info("contextInitialized");
             AppConfig.contextPath = sce.getServletContext().getContextPath();
             Properties config = new Properties();
@@ -35,7 +36,7 @@ public class AppContextListener implements ServletContextListener {
                 InputStream input = sce.getServletContext().getResourceAsStream(fileName);
                 config.load(input);
             } catch (Exception ex) {
-                logger.info(ex.getMessage());
+                logger.error(ex.getMessage(), ex);
             }
             Enumeration en = config.keys();
             while (en.hasMoreElements()) {
@@ -55,16 +56,19 @@ public class AppContextListener implements ServletContextListener {
 
             String OPENSHIFT_MYSQL_DB_HOST = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
             if (OPENSHIFT_MYSQL_DB_HOST != null) {
+                AppConfig.isLive = true;
                 String OPENSHIFT_MYSQL_DB_PORT = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
                 String OPENSHIFT_MYSQL_DB_USERNAME = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
                 String OPENSHIFT_MYSQL_DB_PASSWORD = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
                 String databaseUrl = "jdbc:mysql://" + OPENSHIFT_MYSQL_DB_HOST + ":" + OPENSHIFT_MYSQL_DB_PORT
-                        + "/thuyvan?useUnicode=true&characterEncoding=UTF-8&";
+                        + "/game.com?useUnicode=true&characterEncoding=UTF-8&";
                 AppConfig.databaseUrl = databaseUrl;
                 AppConfig.databaseUser = OPENSHIFT_MYSQL_DB_USERNAME;
                 AppConfig.databasePassword = OPENSHIFT_MYSQL_DB_PASSWORD;
-                AppConfig.OPENSHIFT_DATA_DIR=System.getenv("OPENSHIFT_DATA_DIR");
+                AppConfig.OPENSHIFT_DATA_DIR = System.getenv("OPENSHIFT_DATA_DIR");
+                logger.info("OPENSHIFT_DATA_DIR " + AppConfig.OPENSHIFT_DATA_DIR);
             }
+            logger.info("databaseUrl " + AppConfig.databaseUrl);
             DataAccess.init(AppConfig.databaseUrl, AppConfig.databaseUser, AppConfig.databasePassword);
             AppConfig.categoryList = DataAccess.getCategoryList();
 //        String host = "127.0.0.1";

@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class AppConfig {
 
+    public static boolean isLive = false;
     public static String staticVersion = "";
     public static String webTitle = "";
     public static String contextPath = "";

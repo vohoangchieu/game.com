@@ -10,6 +10,7 @@ import game.com.entity.AjaxResponseEntity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import game.com.entity.GameEntity;
+import game.com.entity.PostEntity;
 import java.io.IOException;
 import java.util.HashSet;
 
@@ -23,9 +24,9 @@ import org.apache.log4j.Logger;
  *
  * @author chieuvh
  */
-public class AjaxAddGameServlet extends BaseServlet {
+public class AjaxAddPostServlet extends BaseServlet {
 
-    private static final Logger logger = Logger.getLogger(AjaxAddGameServlet.class);
+    private static final Logger logger = Logger.getLogger(AjaxAddPostServlet.class);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -64,19 +65,24 @@ public class AjaxAddGameServlet extends BaseServlet {
             responseObject.returnMessage = "input url";
             return;
         }
-        String name = Util.getParameter(request, "name");
-        if (StringUtils.isEmpty(name)) {
-            responseObject.returnMessage = "input name";
+        String title = Util.getParameter(request, "title");
+        if (StringUtils.isEmpty(title)) {
+            responseObject.returnMessage = "input title";
             return;
         }
-        String name_vn = Util.getParameter(request, "name_vn");
-        if (StringUtils.isEmpty(name_vn)) {
-            responseObject.returnMessage = "input name_vn";
+        String keyword = Util.getParameter(request, "keyword");
+        if (StringUtils.isEmpty(keyword)) {
+            responseObject.returnMessage = "input keyword";
             return;
         }
-        String short_desc = Util.getParameter(request, "short_desc");
-        if (StringUtils.isEmpty(short_desc)) {
-            responseObject.returnMessage = "input short_desc";
+        String description = Util.getParameter(request, "description");
+        if (StringUtils.isEmpty(description)) {
+            responseObject.returnMessage = "input description";
+            return;
+        }
+        String content = Util.getParameter(request, "content");
+        if (StringUtils.isEmpty(content)) {
+            responseObject.returnMessage = "input content";
             return;
         }
         String order_weight = Util.getParameter(request, "order_weight");
@@ -84,58 +90,31 @@ public class AjaxAddGameServlet extends BaseServlet {
             responseObject.returnMessage = "input order_weight";
             return;
         }
-        String link_youtube = Util.getParameter(request, "link_youtube");
-        if (StringUtils.isEmpty(link_youtube)) {
-            responseObject.returnMessage = "input link_youtube";
-            return;
-        }
-        String is_promote = Util.getParameter(request, "is_promote");
-        if (StringUtils.isEmpty(is_promote)) {
-            responseObject.returnMessage = "input is_promote";
-            return;
-        }
-        String is_fearture = Util.getParameter(request, "is_fearture");
-        if (StringUtils.isEmpty(is_fearture)) {
-            responseObject.returnMessage = "input is_fearture";
-            return;
-        }
+
         String is_active = Util.getParameter(request, "is_active");
         if (StringUtils.isEmpty(is_active)) {
             responseObject.returnMessage = "input is_promote";
             return;
         }
-        String category = Util.getParameter(request, "category");
-        if (StringUtils.isEmpty(category)) {
-            responseObject.returnMessage = "input category";
-            return;
-        }
-        String long_desc = Util.getParameter(request, "long_desc");
-        if (StringUtils.isEmpty(long_desc)) {
-            responseObject.returnMessage = "input long_desc";
-            return;
-        }
 
-        GameEntity gameEntity = new GameEntity();
+        PostEntity postEntity = new PostEntity();
         if (StringUtils.isBlank(id)) {
-            gameEntity.id = 0;
+            postEntity.id = 0;
         } else {
-            gameEntity.id = Integer.parseInt(id);
+            postEntity.id = Integer.parseInt(id);
         }
-        gameEntity.url = url;
-        gameEntity.name = name;
-        gameEntity.name_vn = name_vn;
-        gameEntity.short_desc = short_desc;
-        gameEntity.order_weight = Integer.parseInt(order_weight);
-        gameEntity.is_promote = Integer.parseInt(is_promote) == 1;
-        gameEntity.link_youtube = link_youtube;
-        gameEntity.is_fearture = Integer.parseInt(is_fearture) == 1;
-        gameEntity.is_active = Integer.parseInt(is_active) == 1;
-        gameEntity.long_desc = long_desc;
-        gameEntity.category_set = getCategorySet(category);
-        if (gameEntity.id <= 0) {
-            int idret = DataAccess.insertGame(gameEntity);
+        postEntity.url = url;
+        postEntity.title = title;
+        postEntity.keyword = keyword;
+        postEntity.description = description;
+        postEntity.content = content;
+        postEntity.order_weight = Integer.parseInt(order_weight);
+        postEntity.is_active = Integer.parseInt(is_active) == 1;
+
+        if (postEntity.id <= 0) {
+            int idret = DataAccess.insertPost(postEntity);
             if (idret > 0) {
-                gameEntity.id = idret;
+                postEntity.id = idret;
                 responseObject.data = String.valueOf(idret);
                 responseObject.returnCode = 1;
                 responseObject.returnMessage = "insert success";
@@ -143,7 +122,7 @@ public class AjaxAddGameServlet extends BaseServlet {
                 responseObject.returnMessage = "system error";
             }
         } else {
-            int idret = DataAccess.updateGame(gameEntity);
+            int idret = DataAccess.updatePost(postEntity);
             if (idret > 0) {
                 responseObject.data = String.valueOf(idret);
                 responseObject.returnCode = 1;
@@ -154,11 +133,5 @@ public class AjaxAddGameServlet extends BaseServlet {
         }
     }
 
-    private HashSet<Integer> getCategorySet(String category) {
-        HashSet<Integer> result = new HashSet();
-        for (String id : category.split(",")) {
-            result.add(Integer.parseInt(id));
-        }
-        return result;
-    }
+  
 }

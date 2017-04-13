@@ -76,6 +76,11 @@ public class HandleDeleteFileServlet extends BaseServlet {
         try {
 
             File file = new File(path);
+            if (file.getName().startsWith(".")) {
+                responseObject.returnCode = 0;
+                responseObject.returnMessage = "not allow";
+                return;
+            }
             if (file.isDirectory()) {
                 if (file.listFiles() != null && file.listFiles().length > 0) {
                     responseObject.returnCode = 0;

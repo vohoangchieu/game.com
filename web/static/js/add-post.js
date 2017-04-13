@@ -49,33 +49,25 @@ function handleAdd() {
 
     var id = $("#id").val();
     var url = $("#url").val();
-    var name = $("#name").val();
-    var name_vn = $("#name_vn").val();
-    var short_desc = $("#short_desc").val();
+    var title = $("#title").val();
+    var keyword = $("#keyword").val();
+    var description = $("#description").val();
     var order_weight = $("#order_weight").val();
-    var link_youtube = $("#link_youtube").val();
-    var is_promote = $("#is_promote:checked").length;
-    var is_fearture = $("#is_fearture:checked").length;
     var is_active = $("#is_active:checked").length;
-    var category = getCategoryVal();
-    var long_desc = tinyMCE.activeEditor.getContent();
+    var content = tinyMCE.activeEditor.getContent();
     $.ajax({
-        url: "/admin/ajax/add-game",
+        url: "/admin/ajax/add-post",
         type: 'POST',
         dataType: 'json',
         data: {
             id: id,
             url: url,
-            name: name,
-            name_vn: name_vn,
-            short_desc: short_desc,
+            title: title,
+            keyword: keyword,
+            description: description,
             order_weight: order_weight,
-            link_youtube: link_youtube,
-            is_promote: is_promote,
-            is_fearture: is_fearture,
             is_active: is_active,
-            category: category,
-            long_desc: long_desc,
+            content: content,
         },
         beforeSend: function () {
         },
@@ -96,7 +88,7 @@ function handleAdd() {
                         timeout: 2
                     });
                     setTimeout(function () {
-                        window.location = "/admin/add-game?id=" + resp.data;
+                        window.location = "/admin/add-post?id=" + resp.data;
                     }, 2000);
                 }
             } else {

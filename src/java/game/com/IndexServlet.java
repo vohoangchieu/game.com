@@ -43,49 +43,15 @@ public class IndexServlet extends BaseServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DataAccess dataAccess = null;
         try {
-//            GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat(AppConfig.dateFormat);
-//            Gson gson = gsonBuilder.create();
-//            String x = Util.getParameter(request, "x");
-//            String y = Util.getParameter(request, "y");
-//            String zoom = Util.getParameter(request, "zoom");
-//            String requestUrl = Util.getRequestUrl(request);
-//            TemplateDataDictionary dic = TemplateDictionary.create();
-//            dic.showSection("popup");
-//            dic.showSection("tuyencap");
-//            dic.showSection("tramthuyvan");
-//            dic.showSection("top");
-//            dic.showSection("left");
-//            dic.showSection("right");
-//            dic.setVariable("x", x);
-//            dic.setVariable("y", y);
-//            dic.setVariable("zoom", zoom);
-////            dic.setVariable("staticVersion",String.valueOf(System.currentTimeMillis()));// AppConfig.staticVersion);
-//            dic.setVariable("staticVersion","");// AppConfig.staticVersion);
-////            dic.setVariable("staticVersion","0");
-//            dic.setVariable("webTitle", AppConfig.webTitle);
-//            dic.setVariable("contextPath", AppConfig.contextPath);
-//            dic.setVariable("requestUrl", requestUrl);
-//            dataAccess.getConnection();
-//
-////            List<TramThuyVanEntity> tramThuyVanList = dataAccess.getTramThuyVanList();
-//////            List<TuyenCapEntity> tuyencapList = dataAccess.getAllTuyenCap();
-////            dic.setVariable("tramThuyVanList", gson.toJson(tramThuyVanList));
-////            dic.setVariable("tuyencapList", gson.toJson(tuyencapList));
-//            Template template = getCTemplate("index");
-//            String data = template.renderToString(dic);
-//            outContent(data, response);
+            String data = "hehe";
+            outContent(data, response);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);
         } finally {
-            if (dataAccess != null) {
-                dataAccess.closeConnection();
-            }
+
         }
 
     }
-
-   
 
 }

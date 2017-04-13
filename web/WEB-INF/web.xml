@@ -5,6 +5,14 @@
             game.com.AppContextListener 
         </listener-class>
     </listener>
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>game.com.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>IndexServlet</servlet-name>
         <servlet-class>game.com.IndexServlet</servlet-class>
@@ -12,6 +20,30 @@
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>game.com.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/hihi/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddPostServlet</servlet-name>
+        <servlet-class>game.com.AddPostServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddPostServlet</servlet-name>
+        <url-pattern>/admin/add-post/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AjaxAddPostServlet</servlet-name>
+        <servlet-class>game.com.AjaxAddPostServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AjaxAddPostServlet</servlet-name>
+        <url-pattern>/admin/ajax/add-post/*</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>ManageFileServlet</servlet-name>
