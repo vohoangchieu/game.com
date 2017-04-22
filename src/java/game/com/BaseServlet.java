@@ -61,15 +61,15 @@ public class BaseServlet extends HttpServlet {
 
     }
 
-    protected void showBaseSection(TemplateDataDictionary dic) {
+    protected void showAdminBaseSection(TemplateDataDictionary dic) {
         dic.showSection("top-head");
-        dic.showSection("best-sell-left");
-        dic.showSection("company");
-        dic.showSection("footer");
+//        dic.showSection("best-sell-left");
+//        dic.showSection("company");
+//        dic.showSection("footer");
         dic.showSection("header");
-        dic.showSection("left-nav");
-        dic.showSection("side-ads");
-        dic.showSection("top-banner");
+//        dic.showSection("left-nav");
+//        dic.showSection("side-ads");
+//        dic.showSection("top-banner");
         dic.showSection("top-nav");
         int countCategoryInTopNav = 0;
         for (CategoryEntity categoryEntity : AppConfig.categoryList) {

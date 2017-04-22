@@ -41,10 +41,13 @@ public class IndexServlet extends BaseServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String data = "hehe";
+            TemplateDataDictionary dic = TemplateDictionary.create();
+             Template template = getCTemplate("index");
+            String data = template.renderToString(dic);
             outContent(data, response);
         } catch (Exception ex) {
             logger.error(ex.getMessage(), ex);

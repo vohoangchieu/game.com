@@ -33,7 +33,7 @@ public class LoginServlet extends BaseServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             TemplateDataDictionary dic = TemplateDictionary.create();
-            Template template = getCTemplate("login");
+            Template template = getCTemplate("admin/login");
             String data = template.renderToString(dic);
             outContent(data, response);
         } catch (Exception ex) {

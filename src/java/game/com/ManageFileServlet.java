@@ -65,9 +65,9 @@ public class ManageFileServlet extends BaseServlet {
                     folderSection.setVariable("imgurl", string.replace(AppConfig.OPENSHIFT_DATA_DIR, "/resource"));
                 }
             }
-            showBaseSection(dic);
+            showAdminBaseSection(dic);
 
-            Template template = getCTemplate("manage-file");
+            Template template = getCTemplate("admin/manage-file");
             String data = template.renderToString(dic);
             outContent(data, response);
         } catch (Exception ex) {

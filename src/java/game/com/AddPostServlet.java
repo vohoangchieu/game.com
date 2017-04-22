@@ -74,9 +74,9 @@ public class AddPostServlet extends BaseServlet {
                 
             }
 
-            showBaseSection(dic);
+            showAdminBaseSection(dic);
             
-            Template template = getCTemplate("add-post");
+            Template template = getCTemplate("admin/add-post");
             String data = template.renderToString(dic);
             outContent(data, response);
         } catch (Exception ex) {

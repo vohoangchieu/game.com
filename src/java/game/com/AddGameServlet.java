@@ -87,7 +87,7 @@ public class AddGameServlet extends BaseServlet {
                 }
             }
 
-            showBaseSection(dic);
+            showAdminBaseSection(dic);
             for (CategoryEntity categoryEntity : AppConfig.categoryList) {
                 TemplateDataDictionary nav = dic.addSection("CATEGORY");
                 nav.setVariable("CATEGORY_ID", String.valueOf(categoryEntity.id));
@@ -96,7 +96,7 @@ public class AddGameServlet extends BaseServlet {
                     nav.setVariable("checked", "checked");
                 }
             }
-            Template template = getCTemplate("add-game");
+            Template template = getCTemplate("admin/add-game");
             String data = template.renderToString(dic);
             outContent(data, response);
         } catch (Exception ex) {
