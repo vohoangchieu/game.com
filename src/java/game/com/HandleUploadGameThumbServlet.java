@@ -6,11 +6,14 @@
 package game.com;
 
 import game.com.entity.AjaxResponseEntity;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 //import game.com.entity.TuyenCapEntity;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import javax.imageio.ImageIO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -71,7 +74,7 @@ public class HandleUploadGameThumbServlet extends BaseServlet {
         ServletFileUpload upload = new ServletFileUpload(factory);
         // maximum file size to be uploaded.
         upload.setSizeMax(maxFileSize);
-        Map<String,List<FileItem>> postData=upload.parseParameterMap(request);
+        Map<String, List<FileItem>> postData = upload.parseParameterMap(request);
         String id = postData.get("id").get(0).getString();
         if (StringUtils.isBlank(id)) {
             logger.info("id= " + id);
@@ -91,9 +94,10 @@ public class HandleUploadGameThumbServlet extends BaseServlet {
                     boolean isInMemory = fi.isInMemory();
                     long sizeInBytes = fi.getSize();
                     // Write the file
-
                     file = new File(AppConfig.OPENSHIFT_DATA_DIR + "/thumb/" + id + ".png");
-
+//                    Image img = ImageIO.read(fi.getInputStream());
+//                    BufferedImage tempPNG = resizeImage(img, 256, 240);
+//                    ImageIO.write(tempPNG, "png", file);
                     fi.write(file);
                     responseObject.data = getThumbUrl(id);
                     responseObject.returnCode = 1;
@@ -109,4 +113,16 @@ public class HandleUploadGameThumbServlet extends BaseServlet {
         }
     }
 
+    public static BufferedImage resizeImage(final Image image, int width, int height) {
+        final BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        final Graphics2D graphics2D = bufferedImage.createGraphics();
+        graphics2D.setComposite(AlphaComposite.Src);
+        //below three lines are for RenderingHints for better image quality at cost of higher processing time
+        graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        graphics2D.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        graphics2D.drawImage(image, 0, 0, width, height, null);
+        graphics2D.dispose();
+        return bufferedImage;
+    }
 }

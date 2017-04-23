@@ -11,17 +11,27 @@ import java.util.HashSet;
  *
  * @author chieuvh
  */
-public class GameEntity extends BaseEntity{
-   public int id;
-   public String url;
-   public String name;
-   public String name_vn;
-   public String short_desc;
-   public String long_desc;
-   public int order_weight;
-   public boolean is_promote;
-   public boolean is_fearture;
-   public String link_youtube;
-   public boolean is_active;
-   public HashSet<Integer> category_set;
+public class GameEntity extends BaseEntity {
+
+    public int id;
+    public String url;
+    public String name;
+    public String name_vn;
+    public String short_desc;
+    public String long_desc;
+    public int order_weight;
+    public boolean is_promote;
+    public boolean is_fearture;
+    public String link_youtube;
+    public boolean is_active;
+    public HashSet<Integer> category_set;
+
+    public String getUrl() {
+        return "/game/" + id + "/" + url;
+    }
+
+    public String getThumbUrl() {
+        return "/resource/thumb/" + id + ".png";
+    }
+
 }

@@ -269,8 +269,7 @@ public class DataAccess {
         return result;
     }
 
-
-    public static List<CategoryEntity> getCategoryList() throws SQLException {
+    public static List<CategoryEntity> getCategoryEntityList() throws SQLException {
         List<CategoryEntity> result = new ArrayList();
         try {
             getConnection();
@@ -300,7 +299,7 @@ public class DataAccess {
 
     public static HashMap<Integer, CategoryEntity> getCategoryMap() throws SQLException {
         HashMap<Integer, CategoryEntity> result = new HashMap();
-        List<CategoryEntity> categoryList = getCategoryList();
+        List<CategoryEntity> categoryList = getCategoryEntityList();
         for (CategoryEntity categoryEntity : categoryList) {
             result.put(categoryEntity.id, categoryEntity);
         }
@@ -353,5 +352,42 @@ public class DataAccess {
             closeConnection();
         }
         return result;
+    }
+
+    public static List<GameEntity> getActiveGameEntityList() {
+        List<GameEntity> result = new ArrayList();
+        String sql = "select * from `game` where is_active=1";
+        try {
+            getConnection();
+            NamedParameterStatement statement = new NamedParameterStatement(conn, sql, Statement.RETURN_GENERATED_KEYS);
+            logger.info(statement.toString());
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                GameEntity gameEntity = getGameEntityFromResultSet(rs);
+                result.add(gameEntity);
+            }
+        } catch (Exception ex) {
+            logger.error(ex.getMessage(), ex);
+        } finally {
+            closeConnection();
+        }
+        return result;
+    }
+
+    private static GameEntity getGameEntityFromResultSet(ResultSet rs) throws SQLException {
+        GameEntity gameEntity = new GameEntity();
+        gameEntity.id = rs.getInt("id");
+        gameEntity.url = rs.getString("url");
+        gameEntity.name = rs.getString("name");
+        gameEntity.name_vn = rs.getString("name_vn");
+        gameEntity.short_desc = rs.getString("short_desc");
+        gameEntity.long_desc = rs.getString("long_desc");
+        gameEntity.order_weight = rs.getInt("order_weight");
+        gameEntity.is_promote = rs.getInt("is_promote") == 1;
+        gameEntity.is_fearture = rs.getInt("is_fearture") == 1;
+        gameEntity.link_youtube = rs.getString("link_youtube");
+        gameEntity.is_active = rs.getInt("is_active") == 1;
+        gameEntity.category_set = getGameCategory(gameEntity.id);
+        return gameEntity;
     }
 }

@@ -6,6 +6,7 @@
 package game.com;
 
 import game.com.entity.CategoryEntity;
+import game.com.entity.GameEntity;
 import hapax.Template;
 import hapax.TemplateDataDictionary;
 import hapax.TemplateException;
@@ -27,7 +28,7 @@ import org.apache.log4j.Logger;
  *
  * @author chieuvh
  */
-public class BaseServlet extends HttpServlet {
+public abstract class BaseServlet extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(BaseServlet.class);
 
@@ -151,13 +152,28 @@ public class BaseServlet extends HttpServlet {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    protected void renderCategoryHeader(TemplateDataDictionary dic,List<CategoryEntity> catagoryEntityList) {
+        for (CategoryEntity categoryEntity : catagoryEntityList) {
+            TemplateDataDictionary category = dic.addSection("CATEGORY");
+            category.setVariable("url", categoryEntity.getUrl());
+            category.setVariable("name", categoryEntity.name);
+        }
+    }
+    protected void renderGameList(TemplateDataDictionary dic,List<GameEntity> gameEntityList) {
+        dic.showSection("game_unit");
+        for (GameEntity gameEntity : gameEntityList) {
+            TemplateDataDictionary category = dic.addSection("GAME");
+            category.setVariable("url", gameEntity.getUrl());
+            category.setVariable("name", gameEntity.name);
+//            category.setVariable("thumb", "/resource/thumb/1.png");
+            category.setVariable("thumb", gameEntity.getThumbUrl());
+            category.setVariable("short_desc", gameEntity.short_desc);
+        }
+    }
+    protected void showBaseSection(TemplateDataDictionary dic) {
+        dic.showSection("header");
+        dic.showSection("footer");
+        dic.showSection("scroll_top");
+        
+    }
 }

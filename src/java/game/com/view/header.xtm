@@ -1,0 +1,88 @@
+<header>
+    <div class="menu_maining">
+        <div class="main_seaching dis_none">
+            <div class="seach_show"><input type="text" placeholder="search game here" id="search_content">
+                <input type="submit" value="" onclick="callSearchAjax();"> </div>
+            <div class="logo_mobile">
+                <div class="lg_mobile">
+                    <h1>
+                        <a href="/"><img src="/static/image/website/logo_game.png" alt=""></a>
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+
+
+        <nav id="cssmenu">
+            <div class="logo">
+                <h1>
+                    <a href="/">
+                        <img src="/static/image/website/logo_game.png" alt="">
+                    </a>
+                </h1>
+            </div>
+            <div id="head-mobile"></div>
+            <div class="button"></div>
+            <ul style="">
+                <li class="active">
+                    <a href="/">TRANG CHỦ</a>
+                </li>
+                <li>
+                    <a href="/news/0">Tin tức</a>
+                </li>
+                <li>
+                    <a href="/news/1">Sự kiện</a>
+                </li>
+                <li>
+                    <a href="/guide">Hướng dẫn</a>
+                </li>
+                <li class="has-sub"><span class="submenu-button"></span>
+                    <span class="submenu-button"></span>
+                    <a href="#">Category</a>
+                    <ul style="">
+                        {{#CATEGORY}}
+                        <li class="has-sub"><span class="submenu-button"></span>
+                            <span class="submenu-button"></span>
+                            <a href="{{url}}">{{name}}</a>
+                        </li>
+                        {{/CATEGORY}}
+<!--                                <li class="has-sub"><span class="submenu-button"></span>
+                            <span class="submenu-button"></span>
+                            <a href="/weapon">Vũ khí</a>
+                        </li>-->
+
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="/video">Videos</a>
+                </li>
+
+            </ul>
+
+
+            <div class="search">
+                <div>
+                    <a id="login_btn" href="/login?url=/" class="search_main fa fa-sign-in "></a>
+                    <a id="logout_btn" href="/logout?url=/" class="search_main fa fa-user-circle display_hide">
+                        <span class="log_out">log out</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="down_mb">
+                <a href="https://cfmvn.onelink.me/3508761275?pid=mainsite&amp;c=play_store" target="_blank">
+                    <img src="/static/image/website/down_mb.png" alt="">
+                    <span class="downtext">Tải Game</span>
+                </a>
+                <a class="buy_money" href="/">
+                    <img src="/static/image/website/napthe.png" alt="">
+                </a>
+            </div>
+        </nav>
+
+
+    </div>
+
+</header>

@@ -252,7 +252,8 @@ input, select {
       margin-bottom: 20px; }
       .videcenter .in_main .list_video li {
         float: left;
-        width: 32%;
+        /*width: 32%;*/
+        width: 22%;
         margin: 0 0 20px 2%; }
         .videcenter .in_main .list_video li .box_img a img {
           width: 100%; }
@@ -271,7 +272,8 @@ input, select {
             line-height: 18px; }
           .videcenter .in_main .list_video li .box_info .gray {
             display: block;
-            white-space: nowrap;
+            /*white-space: nowrap;*/
+            height: 53px;
             font-size: 14px;
             font-family: 'content_font';
             color: #787878;
@@ -302,7 +304,15 @@ input, select {
             opacity: 0.7; }
             .videcenter .in_main .list_video li .box_img .button_play:hover {
               opacity: 1; }
-      .videcenter .in_main .list_video li:first-child, .videcenter .in_main .list_video li:nth-child(4), .videcenter .in_main .list_video li:nth-child(7) {
+/*      .videcenter .in_main .list_video li:first-child, .videcenter .in_main .list_video li:nth-child(4), .videcenter .in_main .list_video li:nth-child(7) {
+        margin-left: 0; }*/
+      .videcenter .in_main .list_video li:first-child, 
+      .videcenter .in_main .list_video li:nth-child(5), 
+      .videcenter .in_main .list_video li:nth-child(9),
+      .videcenter .in_main .list_video li:nth-child(13),
+      .videcenter .in_main .list_video li:nth-child(17),
+      .videcenter .in_main .list_video li:nth-child(21)
+      {
         margin-left: 0; }
 
 .more {
@@ -1664,7 +1674,12 @@ input, select {
     border-radius: 5px;
     width: 220px;
     padding: 0 10px;
-    box-sizing: border-box; }
+    box-sizing: border-box; 
+    
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+  }
   .main_seaching input[type=submit] {
     border: none;
     height: 25px;
@@ -1673,7 +1688,9 @@ input, select {
     box-sizing: border-box;
     cursor: pointer;
     background: url(../image/website/find.png) no-repeat 6px 5px;
-    background-color: #ccc; }
+    /*background-color: #ccc;*/ 
+    border: 1px solid #fff;
+  }
 
 .in_seach {
   display: inline-block;

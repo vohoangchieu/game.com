@@ -1,0 +1,12 @@
+{{#GAME}}
+<li class="js-reveal">
+    <div class="box_img">
+        <a href="{{url}}"><img src="{{thumb}}" alt="{{name}}"><span class="button_play fa fa-caret-right"></span></a>
+
+    </div>
+    <div class="box_info">
+        <h3><a href="{{url}}">{{name}}</a></h3>
+        <p class="gray">{{short_desc}}</p>
+    </div>
+</li>
+{{/GAME}}

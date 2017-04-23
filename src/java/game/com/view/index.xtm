@@ -12,7 +12,7 @@
         <meta property="og:description" content="CrossFire Legends (CF Mobile) website chính thức , 1 siêu phẩm game bắn súng FPS 3D đồ họa cực đẹp chuyển động siêu mượt phát hành bởi VNG.">
         
         <meta name="robots" content="index, follow">
-        <link rel="shortcut icon" href="https://static.cfmobi.vn/icon/favicon.png" type="image/x-icon">
+        <link rel="shortcut icon" href="/static/image/website/favicon.ico" type="image/x-icon">
         <link href="/static/css/style.css" rel="stylesheet">
         <link href="/static/css/font-awesome.css" rel="stylesheet" type="text/css">
         <link href="/static/css/owl.carousel.css" rel="stylesheet">
@@ -27,171 +27,30 @@
     <body>
         <h1 style="display:none">CF Mobile</h1>
     
-    
-        <header>
-            <div class="menu_maining">
-                <div class="main_seaching dis_none">
-				<div class="seach_show"><input type="text" placeholder="Nhập text vào đây...." id="search_content">
-					<input type="submit" value="" onclick="callSearchAjax();"> </div>
-				<div class="logo_mobile">
-					<div class="lg_mobile">
-						<h1>
-							<a href="/"><img src="/static/image/website/logo_game.png" alt=""></a>
-						</h1>
-					</div>
-				</div>
-			</div>
+    {{>header}}
 
-
-
-                <nav id="cssmenu">
-                    <div class="logo">
-                        <h1>
-                            <a href="/">
-                                <img src="/static/image/website/logo_game.png" alt="">
-                            </a>
-                        </h1>
-                    </div>
-                    <div id="head-mobile"></div>
-                    <div class="button"></div>
-                    <ul style="">
-                        <li class="active">
-                            <a href="/">TRANG CHỦ</a>
-                        </li>
-                        <li>
-                            <a href="/news/0">Tin tức</a>
-                        </li>
-                        <li>
-                            <a href="/news/1">Sự kiện</a>
-                        </li>
-                        <li>
-                            <a href="/guide">Hướng dẫn</a>
-                        </li>
-                        <li class="has-sub"><span class="submenu-button"></span>
-                            <span class="submenu-button"></span>
-                            <a href="/weapon">Thư viện</a>
-                            <ul style="">
-                                <li class="has-sub"><span class="submenu-button"></span>
-                                    <span class="submenu-button"></span>
-                                    <a href="/weapon">Vũ khí</a>
-                                </li>
-
-                                <li class="has-sub"><span class="submenu-button"></span>
-                                    <span class="submenu-button"></span>
-                                    <a href="/item">Vật phẩm</a>
-                                </li>
-                                <li class="has-sub"><span class="submenu-button"></span>
-                                    <span class="submenu-button"></span>
-                                    <a href="/mode">Chế độ</a>
-                                </li>
-                                <li class="has-sub"><span class="submenu-button"></span>
-                                    <span class="submenu-button"></span>
-                                    <a href="/map">Bản đồ</a>
-                                </li>
-                                <li class="has-sub"><span class="submenu-button"></span>
-                                    <span class="submenu-button"></span>
-                                    <a href="/character">Nhân vật</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="/video">Videos</a>
-                        </li>
-
-                    </ul>
-                    
-                    
-                    <div class="search">
-                        <div>
-                            <a id="login_btn" href="/login?url=/" class="search_main fa fa-sign-in "></a>
-                            <a id="logout_btn" href="/logout?url=/" class="search_main fa fa-user-circle display_hide">
-                                <span class="log_out">log out</span>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="down_mb">
-                        <a href="https://cfmvn.onelink.me/3508761275?pid=mainsite&amp;c=play_store" target="_blank">
-                            <img src="/static/image/website/down_mb.png" alt="">
-                                <span class="downtext">Tải Game</span>
-                        </a>
-                        <a class="buy_money" href="/">
-                            <img src="/static/image/website/napthe.png" alt="">
-                        </a>
-                    </div>
-                </nav>
-               
-
-            </div>
-
-        </header>
         <article>
             <section>
     <div class="banner_main">
         <div class="main_image">
-            <img src="/static/image/website/mainsite-1482919389647.jpg" alt="">
+            <img src="/static/image/website/mainsite-1482919389647.jpg" alt=""/>
         </div>
     </div>
 </section>
 <section>
-<!--    <section>
-        <div class="hightlight">
-            <div class="content_hightlight">
-                <div class="sliding">
-                    <div class="box_slide js-reveal">
-                      <div id="owl-demo" class="owl-carousel owl-theme">
-                            
-                            <div class="item"><img src="https://static.cfmobi.vn/upload/banner/20170416/hl-event-7-1492305168753.jpg" alt=""></div>
-                            
-                            <div class="item"><img src="https://static.cfmobi.vn/upload/banner/20170416/hl-bo-sung-1492305197916.jpg" alt=""></div>
-                            
-                            <div class="item"><img src="https://static.cfmobi.vn/upload/banner/20170415/hl-map-mode-1492243366055.jpg" alt=""></div>
-                            
-                            
-                            <div class="item"><a href="http://wiki.cfmobi.vn/xwiki/bin/view/Tin%20T%E1%BB%A9c/"><img src="https://static.cfmobi.vn/upload/banner/20170416/hl-huong-dan-1492305219633.jpg" alt=""></a></div>
-                            
-                        </div>
 
-                        <div class="swiper-pagination control"></div>
-                    </div>
-                    <div class="right_thumb js-reveal">
-                        <ul class="button_thum">
-                            <li><a href="/input_code"><img src="/static/image/website/cdk.png" alt=""></a></li>
-                            <li><a href="/coming-soon.html"><img src="/static/image/website/newest.png" alt=""></a></li>
-                        </ul>
-                    </div>
-                    <script>
-                        $(document).ready(function () {
-                            $("#owl-demo").owlCarousel({
-                                itemsCustom: [
-                                    [0, 1],
-                                    [450, 1],
-                                    [650, 1],
-                                    [768, 4],
-                                    [1170, 4]
-                                ],
-                                // Show next and prev buttons
-                                autoPlay: 3000,
-                                slideSpeed: 300,
-                                paginationSpeed: 400,
-                                singleItem: true
-                            });
-                        });
-                    </script>
-                </div>
-            </div>
-        </div>
-    </section>-->
     
     <section>
         <div class="videcenter">
             <div class="mainvideo js-reveal">
-                <h3 class="module">Videos</h3>
+                <div class="news_highlight">
+                            <span><h2>Games</h2></span>
+                        </div>
+                <!--<h3 class="module">Games</h3>-->
                 <div class="in_main">
                     <ul class="list_video">
-    
-    <li class="js-reveal">
+   {{>game_unit}}
+<!--    <li class="js-reveal">
         <div class="box_img">
             <a href="/video_detail/46"><img src="/static/image/website/crossfire-legends--showmatch-dau-tien--ban-day-du--1492228657681.jpg" alt=""><span class="button_play fa fa-caret-right"></span></a>
             
@@ -200,62 +59,9 @@
             <h3><a href="/video_detail/46">Crossfire Legends: Showmatch đầu tiên (bản đầy đủ)</a></h3>
             <p class="gray">Clip đầy đủ của showmatch CrossFire: Legends đầu tiên.</p>
         </div>
-    </li>
+    </li>-->
     
-    <li class="js-reveal">
-        <div class="box_img">
-            <a href="/video_detail/45"><img src="/static/image/website/-1492162094384.jpg" alt=""><span class="button_play fa fa-caret-right"></span></a>
-            
-        </div>
-        <div class="box_info">
-            <h3><a href="/video_detail/45">Crossfire: Legends giao lưu cùng đội ngũ Admin/Caster</a></h3>
-            <p class="gray">Crossfire: Legends giao lưu cùng đội ngũ Admin/Caster</p>
-        </div>
-    </li>
-    
-    <li class="js-reveal">
-        <div class="box_img">
-            <a href="/video_detail/44"><img src="/static/image/website/[crossfire--legends]-trailer-chinh-thuc-1492158938301.png" alt=""><span class="button_play fa fa-caret-right"></span></a>
-            
-        </div>
-        <div class="box_info">
-            <h3><a href="/video_detail/44">Crossfire: Legends tung trailer chính thức</a></h3>
-            <p class="gray">Cuối cùng thì trailer chính thức của Crossfire Legends cũng đã lên sóng</p>
-        </div>
-    </li>
-    
-    <li class="js-reveal">
-        <div class="box_img">
-            <a href="/video_detail/43"><img src="/static/image/website/he-lo-dau-tien-ve-showmatch-trong-crossfire-legends-1492055346001.png" alt=""><span class="button_play fa fa-caret-right"></span></a>
-            
-        </div>
-        <div class="box_info">
-            <h3><a href="/video_detail/43">Hé lộ đầu tiên về Showmatch trong Crossfire Legends</a></h3>
-            <p class="gray">Một hệ thống giải đấu từ nghiệp dư đến chuyên nghiệp đã sẵn sàng chờ các bạn tại Crossfire Legends.</p>
-        </div>
-    </li>
-    
-    <li class="js-reveal">
-        <div class="box_img">
-            <a href="/video_detail/42"><img src="/static/image/website/-1491884180566.png" alt=""><span class="button_play fa fa-caret-right"></span></a>
-            
-        </div>
-        <div class="box_info">
-            <h3><a href="/video_detail/42">Các game thủ chuyên nghiệp nghĩ gì sau khi chơi thử Crossfire Legends?</a></h3>
-            <p class="gray">Hãy cùng lắng nghe chia sẻ của các game thủ chuyên nghiệp sau khi họ được mời chơi thử Crossfire Legends</p>
-        </div>
-    </li>
-    
-    <li class="js-reveal">
-        <div class="box_img">
-            <a href="/video_detail/39"><img src="/static/image/website/crossfire-legends--sung-9a91-ss-1491534266705.png" alt=""><span class="button_play fa fa-caret-right"></span></a>
-            
-        </div>
-        <div class="box_info">
-            <h3><a href="/video_detail/39">Crossfire Legends: Súng 9A91-SS</a></h3>
-            <p class="gray">Một trong những khẩu súng mạnh mẽ trong số các dòng súng trường, 9A91-SS là phiên bản nâng cấp của 9A91.</p>
-        </div>
-    </li>
+
     
     
 </ul>
@@ -271,9 +77,12 @@
         <div class="news_event">
             
     <div class="main_even">
-        <h3 class="module js-reveal">News</h3>
+        <!--<h3 class="module js-reveal">News</h3>-->
+        <div class="news_highlight">
+                            <span><h2>News</h2></span>
+                        </div>
         <div class="menu_event">
-            <div class="tab_event">
+<!--            <div class="tab_event">
                 <ul class="list_event">
                     <li rel="tabs-news" id="0" class="active">
                         <span>Tin tức</span>
@@ -281,14 +90,8 @@
                     <li rel="tabs-events" id="1">
                         <span>Sự kiện</span>
                     </li>
-                    <!--<li rel="tabs-notices" id="2" onclick="selectNotices();">-->
-                        <!--<span>Thông báo</span>-->
-                    <!--</li>-->
-                    <!--<li rel="tabs-updates" id="3" onclick="selectUpdates();">-->
-                        <!--<span>Cập nhật</span>-->
-                    <!--</li>-->
                 </ul>
-            </div>
+            </div>-->
             <div class="dcription_main" id="tabs-news" style="display: block">
                 <ul class="list_dicrip">
                     
@@ -359,16 +162,7 @@
                     
                 </ul>
             </div>
-            <!--<div class="dcription_main" id="tabs-notices" style="display: none">-->
-                <!--<ul class="list_dicrip">-->
-                    <!---->
-                <!--</ul>-->
-            <!--</div>-->
-            <!--<div class="dcription_main" id="tabs-updates" style="display: none">-->
-                <!--<ul class="list_dicrip">-->
-                    <!---->
-                <!--</ul>-->
-            <!--</div>-->
+
             <div class="more js-reveal">
                 <a id="seemore" href="/news/0" class="more_click">Xem Thêm <b class="fa fa-chevron-right coloright"></b></a>
             </div>
@@ -422,64 +216,9 @@
             
         </div>
     </section>
-<!--    <section>
-        <div class="slide_character js-reveal">
-            <div class="main_character">
-                <h3 class="module js-reveal">Game Features</h3>
-              <div id="slide_chac">
-                    
-                    <div class="item"><img src="https://static.cfmobi.vn/upload/banner/20170407/ft-nham-cang-thang-1491530891591.png" alt=""></div>
-                    
-                    <div class="item"><img src="https://static.cfmobi.vn/upload/banner/20170407/ft-mode-da-dang-1491530872439.png" alt=""></div>
-                    
-                    <div class="item"><img src="https://static.cfmobi.vn/upload/banner/20170407/ft-map-phong-phu-1491530850796.png" alt=""></div>
-                    
-                    <div class="item"><img src="https://static.cfmobi.vn/upload/banner/20170407/ft-sung-bao-la-1491530824320.png" alt=""></div>
-                    
-                    <div class="item"><img src="https://static.cfmobi.vn/upload/banner/20170407/ft-giai-dau-tam-co-1491530794304.png" alt=""></div>
-                    
-                </div>
 
-                <div class="next1 fa fa-chevron-right"></div>
-                <div class="prev1 fa fa-chevron-left"></div>
-                <script>
-                    $(document).ready(function () {
-                        var owl = $("#slide_chac");
-                        $("#slide_chac").owlCarousel({
-                            items: 3,
-                            Load: true,
-                            navigation: false, /*bo menu mac dinh*/
-                            pagination: false, /* bo phan trang mac dinh*/
-                            autoPlay: 3000
-                        });
-                        $(".next1").click(function () {
-                            owl.trigger('owl.next');
-                        });
-                        $(".next1").click(function () {
-                            owl.trigger('owl.next');
-                        });
-                        $(".prev1").click(function () {/*pre*/
-                            owl.trigger('owl.prev');
-                        });
-                    });
-                    $("body").data("page", "frontpage");
-                </script>
-            </div>
-        </div>
-    </section>-->
 </section>
-<!--<div class="popup_down" id="popup_down" hidden="" style="display: none;">
-    <div class="pop_main">
-        <div class="qrcode">
-            <img src="/static/image/website/qrcode.png" alt="">
-        </div>
-        <div class="button_app">
-            <a href="/"><img src="/static/image/website/app.png" alt=""></a><a href="/"><img src="/static/image/website/and.png" alt=""></a>
-        </div>
-        <span class="close fa fa-times-circle" id="close_popup"></span>
-    </div>
-    <span class="opaci"></span>
-</div>-->
+
 
 <script>
 $(function () {
@@ -495,84 +234,11 @@ $(function () {
 });
 </script>
         </article>
-        <div class="scroll_heading fa fa-angle-up" id="button_top_page"></div>
+        {{>scroll_top}}
 
-        <footer>
-<!--            <section>
-                <div class="logo_game">
-                    <div class="partner">
-                        <div class="list_part">
-                            <ul class="main_list">
-                                <li class="list_big">
-                                    <ul class="list_child">
-                                        <li class="js-reveal">
-                                            <a href="/">
-                                                <img src="/static/image/website/vng.png" alt="">
-                                            </a>
-                                        </li>
-                                        <li class="js-reveal">
-                                            <a href="/">
-                                                <img src="/static/image/website/smilesgate.png" alt="">
-                                            </a>
-                                        </li>
-                                        <li class="js-reveal">
-                                            <a href="/">
-                                                <img src="/static/image/website/tencent.png" alt="">
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>-->
-            <section>
-                <div class="ending js-reveal">
-                    <div class="text_footer">
-                        <p>Bản quyền trò chơi thuộc công ty Smilegate . Công ty Cổ phần VNG phân phối độc quyền tại Việt Nam</p>
-                        <p>182 Lê Đại Hành, Phường 15, Quận 11, Tp. HCM</p>
-                    </div>
-                </div>
-            </section>
-        </footer>
+        {{>footer}}
 
-<!--        <div class="btn_load">
-		<ul class="loadmain">
-			<li>
-				<div class="qrcode_load hide_load">
-					<a href="https://static.cfmobi.vn/upload/download/20170415/cfmobile2017_04_14_23.apk"><img src="/static/image/website/apkvuong.png" alt=""></a>
-				</div>
-			</li>
-			<li>
-				<div class="qrcode_load hide_load">
-					<a href="https://play.google.com/store/apps/details?id=com.gs5.cfm"><img src="/static/image/website/ggplay.png" alt=""></a>
-				</div>
-			</li>
-			<li>
-				<div class="qrcode_load hide_load">
-					<a href="/"><img src="/static/image/website/appplay.png" alt=""></a>
-				</div>
-			</li>
-			<li>
-				<div class="qrcode_load hide_load">
-					<a href="/"><img src="/static/image/website/money.png" alt=""></a>
-				</div>
-			</li>
-			<li>
-				<div class="qrcode_load">
-					<a class="fa fa-facebook face_social" href="https://www.facebook.com/cfmobi.vn/"></a>
-				</div>
-			</li>
-			<li>
-				<div class="qrcode_load">
-					<a class="fa fa-youtube-play you_social" href="https://www.youtube.com/cflegendstv"></a>
-				</div>
-			</li>
-		</ul>
-	</div>-->
-        
-        <!--<div class="vng_18"></div>-->
+
         
         <script>
             $.fn.scrollReveal();

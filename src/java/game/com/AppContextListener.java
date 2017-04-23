@@ -70,7 +70,7 @@ public class AppContextListener implements ServletContextListener {
             }
             logger.info("databaseUrl " + AppConfig.databaseUrl);
             DataAccess.init(AppConfig.databaseUrl, AppConfig.databaseUser, AppConfig.databasePassword);
-            AppConfig.categoryList = DataAccess.getCategoryList();
+            AppConfig.categoryList = DataAccess.getCategoryEntityList();
 //        String host = "127.0.0.1";
 //        String port = "3306";
 //        String dbname = "chuyennganhso4t";

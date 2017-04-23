@@ -9,7 +9,8 @@ package game.com.entity;
  *
  * @author chieuvh
  */
-public class CategoryEntity extends BaseEntity{
+public class CategoryEntity extends BaseEntity {
+
     public int id;
     public String url;
     public String name;
@@ -17,4 +18,8 @@ public class CategoryEntity extends BaseEntity{
     public String short_desc;
     public String long_desc;
     public int order_weight;
+
+    public String getUrl() {
+        return "/category/" + id + "/" + url;
+    }
 }

@@ -5,21 +5,12 @@
  */
 package game.com;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import hapax.Template;
 import hapax.TemplateDataDictionary;
 import hapax.TemplateDictionary;
-import hapax.TemplateException;
-import hapax.TemplateLoader;
-import hapax.TemplateResourceLoader;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
@@ -46,7 +37,10 @@ public class IndexServlet extends BaseServlet {
             throws ServletException, IOException {
         try {
             TemplateDataDictionary dic = TemplateDictionary.create();
-             Template template = getCTemplate("index");
+            Template template = getCTemplate("index");
+            showBaseSection(dic);
+            renderCategoryHeader(dic, DataCache.getCategoryEntityList());
+            renderGameList(dic, DataCache.getActiveGameEntityList());
             String data = template.renderToString(dic);
             outContent(data, response);
         } catch (Exception ex) {
