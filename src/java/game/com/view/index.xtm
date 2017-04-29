@@ -5,7 +5,7 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
                 
-        <meta name="description" content="CrossFire Legends (CF Mobile) website chính thức , 1 siêu phẩm game bắn súng FPS 3D đồ họa cực đẹp chuyển động siêu mượt phát hành bởi VNG.">
+        <meta name="description" content="">
         <meta name="title" content="CrossFire Legends ( CF Mobile ) Siêu Phẩm Game Bắn Súng FPS">
         <meta name="keywords" content="CF mobile, crossfire,legends,game ban sung ,3d,game fps ,ban sung 3d,đột kích vng, dot kich mobile,đột kích mobile, tap kich,truy kich,cf vng, cf mobile vng,game vng,giải đấu ban súng, thể thao điện tử, game esport,">
         <meta property="og:title" content="CrossFire Legends ( CF Mobile ) Siêu Phẩm Game Bắn Súng FPS">
@@ -31,12 +31,12 @@
 
         <article>
             <section>
-    <div class="banner_main">
-        <div class="main_image">
-            <img src="/static/image/website/mainsite-1482919389647.jpg" alt=""/>
-        </div>
-    </div>
-</section>
+                <div class="banner_main">
+                    <div class="main_image">
+                        <img src="/static/image/website/mainsite-1482919389647.jpg" alt=""/>
+                    </div>
+                </div>
+            </section>
 <section>
 
     
@@ -238,38 +238,5 @@ $(function () {
 
         {{>footer}}
 
-
-        
-        <script>
-            $.fn.scrollReveal();
-           
-            $(document).ready(function () {
-            $("#button_top_page").click(function () {
-            var body = $("html, body");
-            body.stop().animate({scrollTop: 0}, '500', 'swing', function () {});
-            });
-
-            var $loading = $('#loadingDiv').hide();
-            $(document).ajaxStart(function () {
-            $loading.show();
-            }).ajaxStop(function () {
-            $loading.hide();
-            });
-            $(document).keypress(function(event){
-            var keycode = (event.keyCode ? event.keyCode : event.which);
-            if(keycode == '13'){
-            var content = $("#search_content").prop("value");
-            if(content!==undefined && content!==""){
-            callSearchAjax();
-            }
-            }
-            });           
-            });          
-            function callSearchAjax(){
-            var content = $("#search_content").prop("value");
-            window.location.assign("/ajaxsearch?search_content="+content);           
-            }
-        </script>
-    
         </body>
 </html>

@@ -26,9 +26,9 @@
             <div class="button"></div>
             <ul style="">
                 <li class="active">
-                    <a href="/">TRANG CHỦ</a>
+                    <a href="/">Home</a>
                 </li>
-                <li>
+<!--                <li>
                     <a href="/news/0">Tin tức</a>
                 </li>
                 <li>
@@ -36,7 +36,7 @@
                 </li>
                 <li>
                     <a href="/guide">Hướng dẫn</a>
-                </li>
+                </li>-->
                 <li class="has-sub"><span class="submenu-button"></span>
                     <span class="submenu-button"></span>
                     <a href="#">Category</a>

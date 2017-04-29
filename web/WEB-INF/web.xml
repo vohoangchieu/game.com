@@ -11,7 +11,7 @@
     </filter>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
-        <url-pattern>/admin/*</url-pattern>
+        <url-pattern>/adminx/*</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>IndexServlet</servlet-name>
@@ -20,6 +20,14 @@
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>GameServlet</servlet-name>
+        <servlet-class>game.com.GameServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GameServlet</servlet-name>
+        <url-pattern>/game/*</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>

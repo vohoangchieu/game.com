@@ -34,7 +34,7 @@ public class LoginFilter implements Filter {
             if (!request.isSecure()) {
                 response.sendRedirect(loginURI);
                 logger.error("!request.isSecure()");
-                return;
+//                return;
             }
         }
         HttpSession session = request.getSession();

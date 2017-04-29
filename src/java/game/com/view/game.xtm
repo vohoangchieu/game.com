@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+                
+        <meta name="description" content="{{short_desc}}"/>
+        <meta name="title" content="{{name}}"/>
+        <meta name="keywords" content=""/>
+        <meta property="og:title" content="{{name}}"/>
+        <meta property="og:description" content="{{short_desc}}"/>
+        
+        <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="/static/image/website/favicon.ico" type="image/x-icon">
+        <link href="/static/css/style.css" rel="stylesheet">
+        <link href="/static/css/font-awesome.css" rel="stylesheet" type="text/css">
+        <link href="/static/css/owl.carousel.css" rel="stylesheet">
+        <link href="/static/css/owl.theme.css" rel="stylesheet">
+        <script src="/static/js/jquery-1.7.2.min.js"></script>
+        <script src="/static/js/jquery.scroll-reveal.js"></script>
+        <script src="/static/js/owl.carousel.min.js"></script>
+        <script src="/static/js/menu.js"></script>
+        <script src="/static/js/jquery.twbsPagination.min.js"></script>
+        <title>{{name}}</title>
+        </head>
+    <body>
+        <!--<h1 style="display:none">CF Mobile</h1>-->
+    
+    {{>header}}
+
+       <article>
+          
+
+<article>
+    <section>
+        <div class="news_main_content">
+            <div class="content_news_list">
+                <section>
+                    <div class="news_maining">
+                        <div class="breakcrum">
+                            <span class="break_text">Trang chủ</span><b class="break_text fa fa-angle-right"></b>{{#GAME_CATEGORY}}<a class="break_text" href="{{url}}">{{name}}</a>{{/GAME_CATEGORY}}
+                        </div>
+                        <article>
+                            <div class="news_left">
+                                <div class="choose_news">
+                                    <div class="hot_news clear_padding js-reveal">
+                                        <h3 class="title_page">{{name}}</h3>
+                                        <p style="text-align:center">
+                                            <img alt="{{name}}" src="{{thumb}}" style="max-width:640px">
+                                        </p>
+                                        <p>
+                                        {{long_desc}}
+                                        </p>
+                                        <div class="line_head">
+                                            <div class="line-icon"><span>Download</span></div>
+                                        </div>
+                                        <div class="similar_article">
+                                            <ul class="main_similar">
+                                                <li>
+                                                    <span class="icon_date fa fa-download"></span>&nbsp;<a href="{{nesurl}}">{{name}}</a>&nbsp;<span class="icon_date fa fa-download"></span>
+                                                </li>
+                                            </ul>    
+                                        </div>
+<!--                                        <div class="line_head">
+                                            <div class="line-icon"><span>Tin cùng chuyên mục</span></div>
+                                            <div class="similar_article">
+                                                <ul class="main_similar">
+                                                    
+                                                    <li><a href="/news_detail/crossfire-legends-che-do-zombie-trong-casual/60">Crossfire Legends: Chế độ Zombie trong Casual</a><span class="date_similar">22-04-2017</span></li>
+                                                    
+                                                    <li><a href="/news_detail/lam-quen-voi-bo-suu-tap-m4a1-trong-crossfire-legends/57">Làm quen với bộ sưu tập M4A1 trong Crossfire Legends</a><span class="date_similar">20-04-2017</span></li>
+                                                    
+                                                    <li><a href="/news_detail/crossfire-legends-sinh-tu-trong-pvp/56">Crossfire Legends: Sinh Tử trong PVP</a><span class="date_similar">20-04-2017</span></li>
+                                                    
+                                                </ul>
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <aside>
+                            <div class="content_news_right">
+
+                                <div class="news_right js-reveal">
+                                    <div class="title_right_news">
+                                        <span class="text_right">Video</span>
+                                    </div>
+                                    <div class="video_news">
+                                        <iframe style="height: 249px" src="{{link_youtube}}" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                                <div class="news_right js-reveal">
+                                    <div class="title_right_news">
+                                        <span class="text_right">Relative</span>
+                                    </div>
+                                    <div class="recent_news">
+                                        <ul class="recent_list">
+
+                                            {{#RELATIVE_GAME}}
+                                            <li>
+                                                <div class="box_image">
+                                                    <a href="{{url}}"><img src="{{thumb}}" alt="{{name}}"></a>
+                                                </div>
+                                                <div class="box_info">
+                                                    <h3><a href="{{url}}">{{name}}</a></h3>
+                                                    <div class="date_news">{{short_desc}}</div>
+                                                </div>
+                                            </li>
+                                            {{/RELATIVE_GAME}}
+<!--                                            <li>
+                                                <div class="box_image">
+                                                    <a href="/news_detail/lam-quen-voi-bo-suu-tap-m4a1-trong-crossfire-legends/57"><img src="https://static.cfmobi.vn/upload/news/20170420/lam-quen-voi-bo-suu-tap-m4a1-trong-crossfire-legends-1492675688039.jpg" alt=""></a>
+                                                </div>
+                                                <div class="box_info">
+                                                    <h3><a href="/news_detail/lam-quen-voi-bo-suu-tap-m4a1-trong-crossfire-legends/57">Làm quen với bộ sưu tập M4A1 trong Crossfire Legends</a></h3>
+                                                    <div class="date_news"><span class="icon_date fa fa-calendar"></span>20-04-2017</div>
+                                                </div>
+                                            </li>-->
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </aside>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</article>
+<script>
+$(document).ready(function () {
+    var w = $('#div_video').width();
+});
+</script>
+        </article>
+        {{>scroll_top}}
+
+        {{>footer}}
+
+    
+        </body>
+</html>

@@ -667,7 +667,7 @@ input, select {
   clear: both;
   padding: 50px 0 20px 0;
   overflow: auto;
-  background: url(../image/bg_news_01.jpg) no-repeat;
+  background: url(../image/website/bg_news_01.jpg) no-repeat;
   background-size: 100% auto; }
 
 .news_left {
@@ -1437,7 +1437,7 @@ input, select {
 
 /*--------------------------------login---------------------------------*/
 .main_login {
-  background: url(../image/bg_news_01.jpg) no-repeat;
+  background: url(../image/website/bg_news_01.jpg) no-repeat;
   margin-top: 46px;
   padding: 50px 0; }
 

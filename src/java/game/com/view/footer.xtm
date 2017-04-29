@@ -3,9 +3,40 @@
     <section>
         <div class="ending js-reveal">
             <div class="text_footer">
-                <p>Bản quyền trò chơi thuộc công ty Smilegate . Công ty Cổ phần VNG phân phối độc quyền tại Việt Nam</p>
-                <p>182 Lê Đại Hành, Phường 15, Quận 11, Tp. HCM</p>
+                <p>playstation.game9x.biz</p>
             </div>
         </div>
     </section>
 </footer>
+
+
+<script>
+    $.fn.scrollReveal();
+
+    $(document).ready(function () {
+        $("#button_top_page").click(function () {
+            var body = $("html, body");
+            body.stop().animate({scrollTop: 0}, '500', 'swing', function () {});
+        });
+
+        var $loading = $('#loadingDiv').hide();
+        $(document).ajaxStart(function () {
+            $loading.show();
+        }).ajaxStop(function () {
+            $loading.hide();
+        });
+        $(document).keypress(function (event) {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if (keycode == '13') {
+                var content = $("#search_content").prop("value");
+                if (content !== undefined && content !== "") {
+                    callSearchAjax();
+                }
+            }
+        });
+    });
+    function callSearchAjax() {
+        var content = $("#search_content").prop("value");
+        window.location.assign("/ajaxsearch?search_content=" + content);
+    }
+</script>

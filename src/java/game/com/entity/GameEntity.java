@@ -33,5 +33,8 @@ public class GameEntity extends BaseEntity {
     public String getThumbUrl() {
         return "/resource/thumb/" + id + ".png";
     }
+    public String getNesUrl() {
+        return "/resource/nes/" + id + ".zip";
+    }
 
 }

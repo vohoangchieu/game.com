@@ -47,7 +47,7 @@ public class LoginServlet extends BaseServlet {
             if (!request.isSecure()) {
                 doGet(request, response);
                 logger.info("!request.isSecure()");
-                return;
+//                return;
             }
         }
         String username = request.getParameter("username");
